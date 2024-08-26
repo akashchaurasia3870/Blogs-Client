@@ -1,6 +1,9 @@
-import React from 'react';
-import image_ref_c from '../../../assets/img/img7.jpg'
+import React, { useContext } from 'react';
+import image_ref_c from '../../../assets/img/img7.jpg';
+import { BlogDataContext } from '../../../context/Blog_Context';
 const Home = () => {
+
+    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
 
     const notificationItems = [
     {
@@ -91,7 +94,7 @@ const Home = () => {
     ];
     
     const renderCard = (title, items, type) => (
-        <div className="bg-white shadow-md rounded-lg p-4">
+        <div className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
           <h2 className="text-xl font-bold mb-2">{title}</h2>
           <ul className="list-none">
             {items.map((item, index) => (
@@ -120,8 +123,8 @@ const Home = () => {
                       className="w-16 h-16 rounded-md mr-4"
                     />
                     <div>
-                      <p className="text-gray-900 font-semibold">{item.title}</p>
-                      <p className="text-gray-500 text-sm">
+                      <p className={`text-${fontColor}-900 font-semibold`}>{item.title}</p>
+                      <p className={`text-${fontColor}-600 text-sm`}>
                         {formatDate(item.dateEntered)}
                       </p>
                     </div>
@@ -131,7 +134,7 @@ const Home = () => {
             ))}
           </ul>
           <p
-            className="text-sm text-blue-500 cursor-pointer hover:underline"
+            className={`text-sm text-${fontColor}-600 cursor-pointer hover:underline`}
             onClick={() => {
               console.log("Open ", title);
             }}
@@ -153,7 +156,7 @@ const Home = () => {
       
 
     const renderCountCard = (title, count, theme) => (
-        <div className={`bg-[${theme}] text-black shadow-md rounded-lg p-4 text-center`}>
+        <div className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 text-center`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
             <h2 className="text-xl font-bold mb-2">{title}</h2>
             <p className="text-3xl font-bold">{count}</p>
         </div>

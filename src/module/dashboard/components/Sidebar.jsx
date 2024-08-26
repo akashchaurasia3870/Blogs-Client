@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { RxDashboard } from "react-icons/rx";
 import { BsPostcardFill } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
@@ -13,11 +13,15 @@ import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import { IoMail } from "react-icons/io5";
 import { IoNotificationsSharp } from "react-icons/io5";
+import { BlogDataContext } from '../../../context/Blog_Context';
 
 const Sidebar = ({ onMenuItemClick }) => {
 
+    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
+
+
     let [showMenu, setShowMenu] = useState(true);
-    let menu_items = ['Home', 'Blogs', 'Users', 'Notifications', 'Reports', 'Mails'];
+    let menu_items = ['Home', 'Blogs', 'Users', 'Notifications', 'Reports', 'Mails','Accounts'];
 
     let menu_logo = {
         'Home': <FaHouse />,
@@ -26,7 +30,8 @@ const Sidebar = ({ onMenuItemClick }) => {
         'Notifications': <IoNotificationsSharp />,
         'Reports': <MdOutlineReportGmailerrorred />,
         'Mails': <IoMail />,
-        'Settings': <IoSettingsOutline />,
+        'Accounts': <IoSettingsOutline />,
+        'Settings': <MdAccountCircle />,
     }
 
     let handleMenuChange = (isShow) => {
@@ -38,10 +43,10 @@ const Sidebar = ({ onMenuItemClick }) => {
 
     // }, [showMenu])
     return (
-        <div className="h-screen bg-gray-800 text-white w-auto transition-all ease-in-out duration-500 relative ">
+        <div className={`h-screen text-${fontColor}-600 ${fontWeight} ${fontStyle} w-auto transition-all ease-in-out duration-500 relative `} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
             <div className={`p-4 font-bold text-xl  menu_items flex justify-${showMenu?'start':'center'} items-center relative text-[1.5rem] cursor-pointer mt-2`}>
 
-                <div className="menu_icons flex items-center justify-center" onClick={() => { handleMenuChange(true) }}><RxDashboard /></div>
+                <div className={`menu_icons flex items-center justify-center`} onClick={() => { handleMenuChange(true) }}><RxDashboard /></div>
                    <div className={`menu_title ml-5 flex ${showMenu ? 'block' : 'hidden'}`}>Dashboard</div>
 
                     <div className={`menu_control absolute right-3 cursor-pointer text-[1.8rem] ${showMenu ? 'block'  :'hidden'}`} onClick={() => { handleMenuChange(false) }}>
@@ -51,7 +56,7 @@ const Sidebar = ({ onMenuItemClick }) => {
             <ul className="mt-4">
                 {menu_items.map((item) => (
                     <li key={item} className="pb-3" onClick={() => onMenuItemClick(item)}>
-                        <div className={`menu_items flex justify-${showMenu?'start':'center'} items-center text-[0.9rem] bg-white text-black p-4 mx-2 rounded-md hover:bg-black hover:text-white transition-all ease-in duration-300 cursor-pointer ${showMenu ? 'mx-12' : 'mx-4'}`}>
+                        <div className={`menu_items flex justify-${showMenu?'start':'center'} items-center text-[1.2rem] p-4 mx-6 rounded-md hover:bg-black hover:text-white transition-all ease-in duration-300 cursor-pointer ${showMenu ? 'mx-12' : 'mx-4'} bg-${theme}`}>
                             <div className="menu_icons flex items-center justify-center">{menu_logo[item]}</div>
                             <div className={`menu_title ml-5 ${showMenu ? 'block' : 'hidden'}`}>{item}</div>
                         </div>

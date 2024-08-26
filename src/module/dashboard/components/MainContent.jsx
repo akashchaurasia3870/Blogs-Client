@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Home from './Home';
 import Blogs from './Blogs';
 import Users from './Users';
@@ -10,8 +10,12 @@ import Profile from '../../user/pages/profile';
 import SearchSection from './Search/dash_search';
 import Mails from './Mails';
 import Reports from './Reports';
+import { BlogDataContext } from '../../../context/Blog_Context';
 
 const MainContent = ({ activePage }) => {
+
+    const {theme,theme2,fontColor,fontStyle,fontWeight,setTheme,setTheme2,setFontSize,setFontColor,setFontWeight,setFontStyle,setBackgroundImage} = useContext(BlogDataContext);
+
 
     const renderPageContent = () => {
         switch (activePage) {
@@ -37,7 +41,7 @@ const MainContent = ({ activePage }) => {
     };
 
     return (
-        <div className="flex-1 overflow-y-scroll">
+        <div className={`flex-1 overflow-y-scroll bg-${theme} text-${fontColor}-200 ${fontWeight} ${fontStyle}`}>
             <SearchSection className='' />
             <div className="mt-0 p-4">
                 {renderPageContent(activePage)}

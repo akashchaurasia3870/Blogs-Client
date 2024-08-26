@@ -1,8 +1,10 @@
-
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
+import { BlogDataContext } from '../../../context/Blog_Context';
 
-const Reports = () => {
+const Notifications = () => {
+    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
+
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('date');
     const [selectedNotification, setSelectedNotification] = useState(null);
@@ -64,21 +66,21 @@ const Reports = () => {
 
     return (
         <div className="p-6">
-            {/* Header */}
+            {/* Navbar */}
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Report</h1>
+                <h1 className={`text-2xl font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Reports</h1>
                 <div className="flex space-x-4">
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="border border-gray-300 rounded p-2"
+                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
                     >
                         <option value="date">Sort by Date</option>
                     </select>
                     <select
                         value={sortOrder}
                         onChange={(e) => setSortOrder(e.target.value)}
-                        className="border border-gray-300 rounded p-2"
+                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
                     >
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
@@ -91,13 +93,14 @@ const Reports = () => {
                 {notifications.map((notification) => (
                     <div
                         key={notification.id}
-                        className="bg-white shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg"
+                        className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg`}
                         // onClick={() => openModal(notification)}
+                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                     >
                     
-                        <h2 className="text-2xl font-bold mb-4">{notification.title}</h2>
-                                <p className="text-gray-500 mb-2">Date: {notification.date}</p>
-                                <p className="text-gray-500 mb-2">Raised By: {notification.raisedBy}</p>
+                        <h2 className="text-2xl mb-4">{notification.title}</h2>
+                                <p className=" mb-2">Date: {notification.date}</p>
+                                <p className=" mb-2">Raised By: {notification.raisedBy}</p>
                                 <p>{notification.description}</p>
                     </div>
                 ))}
@@ -135,4 +138,4 @@ const Reports = () => {
     );
 };
 
-export default Reports;
+export default Notifications;

@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import api_url from "../../../utils/utils";
+import { BlogDataContext } from "../../../context/Blog_Context";
 
 const AddBlog = () => {
+
+    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
+  
     const [blogData, setBlogData] = useState({
         title: "blog tile",
         content: "blog content",
@@ -161,12 +165,14 @@ const AddBlog = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-            <div className="bg-white p-8 rounded-lg shadow-md w-full">
+        <div className={`min-h-screen bg-${theme} flex items-center justify-center text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
+            <div className="p-8 rounded-lg shadow-md w-full">
                 <h2 className="text-2xl font-semibold mb-6">Create a New Blog Post</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="flex flex-col items-start justify-center">
-                        <span className="text-gray-700 py-3">Title:</span>
+                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" 
+                    style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                    >
+                        <span className="">Title:</span>
                         <input
                             type="text"
                             name="title"
@@ -177,8 +183,8 @@ const AddBlog = () => {
                             className="w-full md:w-1/2 lg:w-1/3 rounded-md bg2 p-3"
                         />
                     </div>
-                    <div className="flex flex-col items-start justify-center">
-                        <span className="block text-gray-700 p-3 ">Caption:</span>
+                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                        <span className="block">Caption:</span>
                         <input
                             type="text"
                             name="caption"
@@ -188,8 +194,8 @@ const AddBlog = () => {
                             className="w-full md:w-1/2 lg:w-1/3 rounded-md bg2 p-3"
                         />
                     </div>
-                    <div className="flex flex-col items-start justify-center">
-                        <span className="block text-gray-700 p-3 ">Hashtags:</span>
+                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                        <span className="block">Hashtags:</span>
                         <input
                             type="text"
                             name="hashtags"
@@ -199,8 +205,8 @@ const AddBlog = () => {
                             className="w-full md:w-1/2 lg:w-1/3 rounded-md bg2 p-3"
                         />
                     </div>
-                    <div className="flex flex-col items-start justify-center">
-                        <span className="text-gray-700 p-3 ">Content:</span>
+                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                        <span className="">Content:</span>
                         <textarea
                             name="content"
                             value={blogData.content}
@@ -212,8 +218,8 @@ const AddBlog = () => {
                         ></textarea>
                     </div>
 
-                    <div className="flex flex-col items-start justify-center">
-                        <span className="block text-gray-700 p-3 ">Post Images (Max 5):</span>
+                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                        <span className="block  p-3 ">Post Images (Max 5):</span>
                         <input
                             type="file"
                             accept="image/*"
@@ -238,8 +244,8 @@ const AddBlog = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="flex flex-col items-start justify-center">
-                        <span className="block text-gray-700 p-3 ">Post Videos (Max 2):</span>
+                    <div className="flex flex-col items-start justify-center p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+                        <span className="block  p-3 ">Post Videos (Max 2):</span>
                         <input
                             type="file"
                             accept="video/*"

@@ -5,7 +5,9 @@ import {BlogDataContext } from '../../../context/Blog_Context';
 
 const PopularAuthors = () => {
 
-    let {authors_data} = useContext(BlogDataContext);
+    let { theme,theme2,fontColor,fontStyle,fontWeight ,
+        authors_data, setAuthorsData,similier_data, 
+        setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
     const [authors, setAuthors] = useState(authors_data);
     const [page, setPage] = useState(1);
     const [dataSize, setDataLimit] = useState(5);
@@ -46,8 +48,8 @@ const PopularAuthors = () => {
 
 
     return (
-        <div className="p-6">
-            <h1 className="text-2xl font-bold mb-6">Popular Authors</h1>
+        <div className={`p-6 mx-6 rounded-lg`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+            <h1 className={`text-2xl font-bold mb-6 text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>Popular Authors</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {authors.length > 0 && authors.map((author) => (
                     <PopularAuthorCard key={author.user_id} author={author} />

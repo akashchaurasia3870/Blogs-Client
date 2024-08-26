@@ -19,7 +19,7 @@ const CustomToolbar = ({ onChange }) => {
 
             <select className="ql-header" defaultValue="" onChange={onChange}>
                 <option value="1"> selectedHeader 1</option>
-                <option value="2">Header 2</option>
+                <option value="2">Navbar 2</option>
                 <option value="">Normal</option>
             </select>
 

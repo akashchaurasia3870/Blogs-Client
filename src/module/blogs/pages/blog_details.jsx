@@ -20,7 +20,7 @@ import { BlogDataContext } from '../../../context/Blog_Context';
 
 function BlogDetails({ data }) {
 
-    let {
+    let { theme,theme2,fontColor,fontStyle,fontWeight ,
         authors_data, setAuthorsData,similier_data, 
         setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
 
@@ -47,19 +47,19 @@ function BlogDetails({ data }) {
     }, [blog_id]);
 
     return (
-        <section className='min-h-[70vh] py-8'>
-            <div className="mx-10 flex flex-col lg:flex-row">
+        <section className={`min-h-[70vh] py-8 bg-${theme}`}>
+            <div className={`mx-10 flex flex-col lg:flex-row text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-lg`}>
                 {/* Blog Details Section */}
-                <div className="w-full lg:w-3/4 pr-0 lg:pr-8 flex flex-col justify-between">
+                <div className="w-full lg:w-3/4 pr-0 lg:pr-8 flex flex-col justify-between rounded-lg mr-4" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
 
-                    <div className="flex flex-col justify-center">
+                    <div className="flex flex-col justify-center p-2 mx-2">
 
-                        <div className='p-2 flex justify-between items-center'>
+                        <div className='flex justify-between items-center'>
                             <h1>{blog.caption}</h1>
                             <h3 className='flex justify-between items-center'><SlCalender className='mr-2' />{new Date(blog.date_created).toLocaleDateString('en-GB')}</h3>
                         </div>
                         <div className="flex flex-col justify-center items-center">
-                            <img src={img_path} alt="Blog Thumbnail" className="max-h-[60vh] rounded-lg" />
+                            <img src={img_path} alt="Blog Thumbnail" className="max-h-[60vh] rounded-lg object-contain" />
                             <p className="mt-8 text-lg leading-relaxed">{blog.content}</p>
 
                             <p className="mt-8 text-lg leading-relaxed">
@@ -129,7 +129,7 @@ function BlogDetails({ data }) {
                 </div>
 
                 {/* Trending blog Section */}
-                <TrendingBlogs trainding_data={trainding_data} />
+                <TrendingBlogs trainding_data={trainding_data}  />
             </div>
 
             {/* Below Blog Details */}

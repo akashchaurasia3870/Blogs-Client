@@ -1,148 +1,10 @@
-// import React, { useState } from 'react';
-
-// const Notifications = () => {
-//     const [sortOrder, setSortOrder] = useState('asc');
-//     const [sortBy, setSortBy] = useState('date');
-//     const [currentPage, setCurrentPage] = useState(1);
-//     const [selectedNotification, setSelectedNotification] = useState(null);
-//     const [modalOpen, setModalOpen] = useState(false);
-
-
-//     // Sample notification data
-//     const notifications = [
-//         { id: 1, title: 'Your password has been successfully updated.', date: '2024-08-01' },
-//         { id: 2, title: 'You have a new friend request.', date: '2024-08-02' },
-//         { id: 3, title: 'Your profile picture has been changed.', date: '2024-08-03' },
-//         { id: 4, title: 'You have a new title.', date: '2024-08-04' },
-//         { id: 5, title: 'Your blog blog has been approved.', date: '2024-08-05' },
-//         { id: 6, title: 'Your comment received a reply.', date: '2024-08-06' },
-//         { id: 7, title: 'You have been mentioned in a blog.', date: '2024-08-07' },
-//         { id: 8, title: 'Your account has been upgraded.', date: '2024-08-08' },
-//         { id: 9, title: 'Your subscription has been renewed.', date: '2024-08-09' },
-//         { id: 10, title: 'New updates are available.', date: '2024-08-10' },
-//         { id: 11, title: 'You have a new follower.', date: '2024-08-11' },
-//         { id: 12, title: 'Your profile settings have been saved.', date: '2024-08-12' },
-//     ];
-
-//     // Sort and paginate the notifications
-//     const sortedNotifications = [...notifications].sort((a, b) => {
-//         if (sortBy === 'date') {
-//             return sortOrder === 'asc'
-//                 ? new Date(a.date) - new Date(b.date)
-//                 : new Date(b.date) - new Date(a.date);
-//         }
-//         return 0;
-//     });
-
-
-
-//     const notificationsPerPage = 9;
-//     const totalPages = Math.ceil(sortedNotifications.length / notificationsPerPage);
-//     const paginatedNotifications = sortedNotifications.slice(
-//         (currentPage - 1) * notificationsPerPage,
-//         currentPage * notificationsPerPage
-//     );
-
-//     const openModal = (notification) => {
-//         setSelectedNotification(notification);
-//         setModalOpen(true);
-//     };
-
-//     const closeModal = () => {
-//         setModalOpen(false);
-//         setSelectedNotification(null);
-//     };
-
-//     return (
-//         <div className="p-6">
-//             {/* Header */}
-//             <div className="flex justify-between items-center mb-6">
-//                 <h1 className="text-2xl font-bold">Notifications</h1>
-//                 <div className="flex space-x-4">
-//                     <select
-//                         value={sortBy}
-//                         onChange={(e) => setSortBy(e.target.value)}
-//                         className="border border-gray-300 rounded p-2"
-//                     >
-//                         <option value="date">Sort by Date</option>
-//                     </select>
-//                     <select
-//                         value={sortOrder}
-//                         onChange={(e) => setSortOrder(e.target.value)}
-//                         className="border border-gray-300 rounded p-2"
-//                     >
-//                         <option value="asc">Ascending</option>
-//                         <option value="desc">Descending</option>
-//                     </select>
-//                 </div>
-//             </div>
-
-//             {/* Notification Content */}
-//             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-//                 {paginatedNotifications.map((notification) => (
-//                     <div
-//                         key={notification.id}
-//                         className="bg-white shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg"
-//                         onClick={() => openModal(notification)}
-//                     >
-//                         <h2 className="text-xl font-bold mb-2">{notification.title}</h2>
-//                         <p className="text-gray-500">Date: {notification.date}</p>
-//                     </div>
-//                 ))}
-//             </div>
-
-//             {/* Pagination */}
-//             <div className="flex justify-center mt-6">
-//                 <button
-//                     onClick={() => setCurrentPage(currentPage - 1)}
-//                     disabled={currentPage === 1}
-//                     className="bg-blue-500 text-white py-2 px-4 rounded-l disabled:opacity-50"
-//                 >
-//                     Previous
-//                 </button>
-//                 <div className="bg-blue-500 text-white py-2 px-4">
-//                     Page {currentPage} of {totalPages}
-//                 </div>
-//                 <button
-//                     onClick={() => setCurrentPage(currentPage + 1)}
-//                     disabled={currentPage === totalPages}
-//                     className="bg-blue-500 text-white py-2 px-4 rounded-r disabled:opacity-50"
-//                 >
-//                     Next
-//                 </button>
-//             </div>
-
-//             {/* Modal */}
-//             {modalOpen && (
-//                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-//                     <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
-//                         <button
-//                             onClick={closeModal}
-//                             className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl"
-//                         >
-//                             &times;
-//                         </button>
-//                         {selectedNotification && (
-//                             <>
-//                                 <h2 className="text-2xl font-bold mb-4">{selectedNotification.title}</h2>
-//                                 <p className="text-gray-500 mb-2">Date: {selectedNotification.date}</p>
-//                                 <p>{selectedNotification.title}</p>
-//                             </>
-//                         )}
-//                     </div>
-//                 </div>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default Notifications;
-
-
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
+import { BlogDataContext } from '../../../context/Blog_Context';
 
-const Mails = () => {
+const Notifications = () => {
+    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
+
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('date');
     const [selectedNotification, setSelectedNotification] = useState(null);
@@ -204,21 +66,21 @@ const Mails = () => {
 
     return (
         <div className="p-6">
-            {/* Header */}
+            {/* Navbar */}
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Mails</h1>
+                <h1 className={`text-2xl font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Mails</h1>
                 <div className="flex space-x-4">
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="border border-gray-300 rounded p-2"
+                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
                     >
                         <option value="date">Sort by Date</option>
                     </select>
                     <select
                         value={sortOrder}
                         onChange={(e) => setSortOrder(e.target.value)}
-                        className="border border-gray-300 rounded p-2"
+                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
                     >
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
@@ -231,13 +93,14 @@ const Mails = () => {
                 {notifications.map((notification) => (
                     <div
                         key={notification.id}
-                        className="bg-white shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg"
-                        // onClick={() => openModal(notification)}
+                        className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 cursor-pointer hover:shadow-lg`}
+                        // onClick={() => openModal(notification)} 
+                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                     >
                     
-                        <h2 className="text-2xl font-bold mb-4">{notification.title}</h2>
-                                <p className="text-gray-500 mb-2">Date: {notification.date}</p>
-                                <p className="text-gray-500 mb-2">Raised By: {notification.raisedBy}</p>
+                        <h2 className="text-2xl mb-4">{notification.title}</h2>
+                                <p className=" mb-2">Date: {notification.date}</p>
+                                <p className=" mb-2">Raised By: {notification.raisedBy}</p>
                                 <p>{notification.description}</p>
                     </div>
                 ))}
@@ -275,4 +138,4 @@ const Mails = () => {
     );
 };
 
-export default Mails;
+export default Notifications;

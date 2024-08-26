@@ -1,19 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import img1 from '../../assets/img/img1.jpg'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
+import { BlogDataContext } from '../../context/Blog_Context';
 
-function Header() {
+function Navbar() {
 
     let nevigate = useNavigate();
+    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
+  
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         nevigate('/signin');
     }
     return (
-        <nav className='nav_container w-full'>
+        <nav className={`w-full flex items-center justify-between text-${fontColor}-600 ${fontWeight} ${fontStyle}`} 
+        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+        >
 
             <Link to="/" className='nav_logo '>
                 <img src={img1} alt="Logo" className='rounded-lg' />
@@ -39,4 +44,4 @@ function Header() {
     )
 }
 
-export default Header
+export default Navbar

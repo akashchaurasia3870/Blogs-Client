@@ -35,7 +35,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="flex bg-white max-h-screen">
+        <div className="flex max-h-screen">
             <Sidebar onMenuItemClick={setActivePage} />
             <MainContent activePage={activePage}>
                 {renderPageContent()}

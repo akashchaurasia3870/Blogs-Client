@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import api_url from '../../../utils/utils';
 import { IoMdAdd } from "react-icons/io";
 import { Link } from 'react-router-dom'
+import { BlogDataContext } from '../../../context/Blog_Context';
 const PopularAuthorCard = ({ author }) => {
+
+    let { theme,theme2,fontColor,fontStyle,fontWeight ,
+        authors_data, setAuthorsData,similier_data, 
+        setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
+    
 
     function themeGenerator() {
         const colors = [
@@ -35,9 +41,8 @@ const PopularAuthorCard = ({ author }) => {
         >
 
             <div
-                className={`bg-${author?.theme ? author?.theme : themeGenerator()} shadow-md rounded-lg p-4 flex items-center w-full relative`}
-            // style={{ background: themeGenerator() }}
-            >
+                className={`text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 flex items-center w-full relative`}
+                style={{backgroundColor:themeGenerator()}}            >
                 <img
                     // src={api_url + author.userImage}
                     src="http://localhost:5000/data/images/54f7c469-ba65-4798-bff1-d28b8f574028.jpeg"
@@ -47,7 +52,7 @@ const PopularAuthorCard = ({ author }) => {
                 <div>
                     {/* <h3 className="text-xl font-bold mb-1">{author.username}</h3> */}
                     <h3 className="text-xl font-bold mb-1">{author?.username ? author.username : "Monkey D luffy"}</h3>
-                    <p className="text-gray-800">Posts: 7</p>
+                    <p className="">Posts: 7</p>
                 </div>
                 <div className="flex items-center justify-center bg-green-500 px-2 py-1 rounded-md text-white text-xm md:text-sm lg:text-sm absolute right-2 bottom-2 cursor-pointer">
                     <span className='mx-2'>Follow</span>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import api_url from '../../../utils/utils';
 import { GrLike } from "react-icons/gr";
@@ -8,21 +8,29 @@ import { CiCirclePlus } from "react-icons/ci";
 import { GoComment } from "react-icons/go";
 import { SlCalender } from "react-icons/sl";
 import Hashtag from './hashtag';
+import { BlogDataContext } from '../../../context/Blog_Context';
 
 const BlogItemDetails = ({ data }) => {
+
+    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
+  
+
     let blog_data = data
     let img_path = data.filePaths.images;
     img_path = api_url + img_path;
 
     const short_desc = blog_data?.content?.length > 130 ? blog_data?.content?.substr(0, 130) + "..." : blog_data?.content;
 
-    const blog_title = blog_data?.caption?.length > 30 ? blog_data?.caption?.substr(0, 30) + "..." : blog_data?.caption;
+    const blog_title = blog_data?.caption?.length > 15 ? blog_data?.caption?.substr(0, 15) + "..." : blog_data?.caption;
+
     return (
-        <article className='p-3 bg-gray-200 rounded-[10px] '>
+        <article className={`p-3 text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-[10px]`} 
+        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+        >
             <Link to={`/blog/${blog_data.blog_id}`} state={{ blogData: blog_data }}>
 
-                <div className="blog_thumbnail max-h-[35%]">
-                    <img src={img_path} alt="thumbnail" />
+                <div className=" h-[200px]">
+                    <img src={img_path} alt="thumbnail" className='object-contain h-full w-full' />
                 </div>
                 <div className="blog_content">
                     <div className='flex justify-between items-center'>
@@ -40,7 +48,7 @@ const BlogItemDetails = ({ data }) => {
             </Link>
 
             {/* Additional Information */}
-            <div className="blog_additional_info mt-4 text-sm text-gray-600 flex flex-col space-y-2">
+            <div className="blog_additional_info mt-4 text-sm flex flex-col space-y-2">
 
                 {/* Hashtags */}
                 <div className="blog_hashtags mt-2">

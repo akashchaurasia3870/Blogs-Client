@@ -12,9 +12,10 @@ export const BlogDataProvider = ({ children }) => {
     const [similier_data, setSimilierData] = useState(null);
     const [trainding_data, setTrandingData] = useState(null);
 
-    const [theme, setTheme] = useState('light');
-    const [fontSize, setFontSize] = useState('text-md');
-    const [fontColor, setFontColor] = useState('#000000');
+    const [theme, setTheme] = useState('white');
+    const [theme2, setTheme2] = useState('200');
+    const [fontSize, setFontSize] = useState('text-sm');
+    const [fontColor, setFontColor] = useState('blue');
     const [fontWeight, setFontWeight] = useState('font-normal');
     const [fontStyle, setFontStyle] = useState('font-normal');
     const [backgroundImage, setBackgroundImage] = useState('');
@@ -31,11 +32,11 @@ export const BlogDataProvider = ({ children }) => {
 
     const themeStyles = {
         light: {
-            backgroundColor: '#ffffff',
+            backgroundColor: 'white',
             color: fontColor,
         },
         dark: {
-            backgroundColor: '#333333',
+            backgroundColor: 'black',
             color: fontColor,
         },
     };
@@ -62,6 +63,11 @@ export const BlogDataProvider = ({ children }) => {
 
             console.log(data);
             setTheme(data.theme);
+            if(data.theme=='white'){
+                setTheme2('200');
+            }else{
+                setTheme2('800');
+            }
             setFontColor(data.fontColor);
             setFontSize(data.fontSize);
             setFontStyle(data.fontStyle);
@@ -115,9 +121,15 @@ export const BlogDataProvider = ({ children }) => {
        });
    }
 
+   useEffect(()=>{
+    getThemeData()
+   },[])
+
     const BlogContextValue = {
         theme,
         setTheme,
+        theme2, 
+        setTheme2,
         fontSize,
         setFontSize,
         fontColor,
@@ -147,10 +159,12 @@ export const BlogDataProvider = ({ children }) => {
         setTrandingData
     };
 
+    // #1e293b 800
+   // #e2e8f0 200
 
     return (
         <BlogDataContext.Provider value={BlogContextValue}>
-            <div className={`${fontSize} ${fontWeight} ${fontStyle} text-[${fontColor}]`} style={{ background: `${backgroundImage}` }}>
+            <div className={`${fontWeight} ${fontStyle} text-${fontColor} bg-slate-200 `}>
               {children}
             </div>
         </BlogDataContext.Provider>

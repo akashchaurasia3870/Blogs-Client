@@ -3,8 +3,9 @@ import img from '../../../assets/img/img8.jpg';
 import { BlogDataContext } from "../../../context/Blog_Context";
 import api_url from "../../../utils/utils";
 const Profile = () => {
-    // State to store form values, edit mode, and original data
-    // const { data.data, setUserData } = useContext(BlogDataContext);
+
+    const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
+  
 
     // console.log(data.data);
 
@@ -161,12 +162,14 @@ const Profile = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-            <div className="bg-white p-6 rounded-lg shadow-md w-full ">
+        <div className={`flex flex-col items-center justify-center min-h-screen bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle} p-4`} 
+        >
+            <div className="p-6 rounded-lg shadow-md w-full">
                 <h2 className="text-2xl font-semibold mb-6">Profile Page</h2>
                 <div className="flex flex-row-reverse justify-center items-center ">
                     {/* User Image Section */}
-                    <div className="w-full lg:w-2/5 flex flex-col items-center justify-center">
+                    <div className="w-full lg:w-2/5 flex flex-col items-center justify-center"             style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                    >
                         <img
                             src={image_url}
                             alt="User"
@@ -176,12 +179,12 @@ const Profile = () => {
                             <input
                                 type="file"
                                 onChange={handleImageChange}
-                                className="p-2 rounded-lg bg-gray-300 text-sm text-white
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-full file:border-0
-                file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
-                hover:file:bg-gray-400"
+                                className="p-2 rounded-lg  text-sm
+                                           file:mr-4 file:py-2 file:px-4
+                                           file:rounded-full file:border-0
+                                           file:text-sm file:font-semibold
+                                            file:bg-blue-50 file:text-blue-700
+                                            hover:file:bg-gray-400"
                             />
                         )}
                     </div>
@@ -189,86 +192,93 @@ const Profile = () => {
                     {/* Profile Details Section */}
                     <div className="w-full lg:w-3/5 pl-6">
                         <form className="space-y-4">
-                            <div className="input_container">
-                                <label className="block text-gray-700">Username:</label>
+                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            >
+                                <label className="block ">Username:</label>
                                 <input
                                     type="text"
                                     name="username"
                                     value={profileData.username}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                 />
                             </div>
-                            <div className="input_container">
-                                <label className="block text-gray-700">Email:</label>
+                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            >
+                                <label className="block ">Email:</label>
                                 <input
                                     type="email"
                                     name="email"
                                     value={profileData.email}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                 />
                             </div>
-                            <div className="input_container">
-                                <label className="block text-gray-700">Password:</label>
+                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            >
+                                <label className="block ">Password:</label>
                                 <input
                                     type="password"
                                     name="password"
                                     value={profileData.password}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                 />
                             </div>
-                            <div className="input_container">
-                                <label className="block text-gray-700">Number of Blogs:</label>
+                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            >
+                                <label className="block ">Number of Blogs:</label>
                                 <input
                                     type="number"
                                     name="blogsNo"
                                     value={profileData.blogsNo}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                 />
                             </div>
-                            <div className="input_container">
-                                <label className="block text-gray-700">Mobile No:</label>
+                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            >
+                                <label className="block ">Mobile No:</label>
                                 <input
                                     type="text"
                                     name="mobileNo"
                                     value={profileData.mobileNo}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                 />
                             </div>
-                            <div className="input_container">
-                                <label className="block text-gray-700">Address:</label>
+                            <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            >
+                                <label className="block">Address:</label>
                                 <input
                                     type="text"
                                     name="address"
                                     value={profileData.address}
                                     onChange={handleChange}
                                     disabled={!isEditable}
-                                    className="mt-1 block w-full rounded-md bg-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                    className="mt-1 block w-full rounded-md shadow-sm bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                 />
                             </div>
-                            <div className="flex space-x-4 mt-4 input_container">
+                            <div className="flex space-x-4 mt-4 input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            >
                                 {isEditable ? (
                                     <>
                                         <button
                                             type="button"
                                             onClick={updateUserDetails}
-                                            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                                            className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600"
                                         >
                                             Save
                                         </button>
                                         <button
                                             type="button"
                                             onClick={cancelEdit}
-                                            className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                                            className="px-4 py-2 bg-gray-500 rounded-md hover:bg-gray-600"
                                         >
                                             Cancel
                                         </button>

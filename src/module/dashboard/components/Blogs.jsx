@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
 import image_ref_c from '../../../assets/img/img7.jpg'
 import DashBlogItem from './DashBlogItem/DashBlogItem';
+import { BlogDataContext } from '../../../context/Blog_Context';
 
 const Blogs = () => {
+
+    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
+
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('name');
     const [selectedBlog, setSelectedBlog] = useState(null);
@@ -171,16 +175,16 @@ const Blogs = () => {
 
     return (
         <div className="px-4 min-h-[86vh] flex flex-col justify-between pb-4">
-            {/* Header */}
+            {/* Navbar */}
 
             <div>
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Blogs</h1>
+                <h1 className={`text-2xl font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Blogs</h1>
                 <div className="flex space-x-4">
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="border border-gray-300 rounded p-2"
+                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
                     >
                         <option value="name">Sort by Name</option>
                         <option value="date">Sort by Date</option>
@@ -189,7 +193,7 @@ const Blogs = () => {
                     <select
                         value={sortOrder}
                         onChange={(e) => setSortOrder(e.target.value)}
-                        className="border border-gray-300 rounded p-2"
+                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
                     >
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>

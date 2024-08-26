@@ -28,7 +28,7 @@ function ViewBlogs({handleSearch,handleSort,handleLayoutChange,blogs_data,layout
                 <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${
                     layout
                         ? 'lg:grid-cols-4'
-                        : 'lg:grid-cols-5'
+                        : 'lg:grid-cols-3'
                 }`}>
                     {blogs_data.map((blog_data, index) => (
                         <BlogItemDetails data={blog_data} key={index} />

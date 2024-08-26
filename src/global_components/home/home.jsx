@@ -59,7 +59,7 @@ function Home() {
 
     let {user_data, setUserData,blog_data, setBlogData,
          authors_data, setAuthorsData,similier_data, 
-         setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
+         setSimilierData,trainding_data, setTrandingData,setFontStyle,setFontWeight,setTheme,setTheme2,setBackgroundImage,setFontSize,theme,theme2,fontColor,fontStyle,fontWeight}  = useContext(BlogDataContext);
 
     const [blogs_data, setBlogsData] = useState([]);
     const [layout, setLayout] = useState(true); // true for grid, false for list
@@ -113,13 +113,23 @@ function Home() {
             return response.json();
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             
 
             setBlogsData(data.data);
             setSimilierData(data.data_c.category_blog);
             setTrandingData(data.data_c.trending_blog);
             setAuthorsData(data.data_c.trending_author);
+            setFontStyle(data.data_c.theme_data.fontColor);
+            setFontSize(data.data_c.theme_data.fontSize);
+            setFontWeight(data.data_c.theme_data.fontWeight);
+            setTheme(data.data_c.theme_data.theme);
+            if(data.theme=='white'){
+                setTheme2('200');
+            }else{
+                setTheme2('800');
+            }
+            setBackgroundImage(data.data_c.backgroundStyle)
             // setLoading(false);
         })
         .catch(error => {
@@ -133,8 +143,11 @@ function Home() {
 
 
     return (
-        <div className='home_container'>
-            <HomeSlider slides={slides} />
+        <div className={`bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
+            <div className="box pt-6">
+
+                <HomeSlider slides={slides} />
+            </div>
             <CategorySlider />
             <ViewBlogs handleSearch={handleSearch} handleLayoutChange={handleLayoutChange} handleSort={handleSort} blogs_data={blogs_data} layout={layout} trainding_data={trainding_data} authors_data={authors_data} similier_data={similier_data} />
             <Pagination />

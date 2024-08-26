@@ -40,7 +40,7 @@ const FAQ = () => {
 
     return (
         <div className="p-6">
-            {/* Header */}
+            {/* Navbar */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">FAQ</h1>
                 <div className="flex space-x-4">

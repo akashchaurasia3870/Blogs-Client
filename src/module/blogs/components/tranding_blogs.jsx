@@ -8,9 +8,12 @@ import {BlogDataContext } from '../../../context/Blog_Context';
 
 
 function TrendingBlogs() {
-    
-    let {trainding_data} = useContext(BlogDataContext);
 
+    
+    let { theme,theme2,fontColor,fontStyle,fontWeight ,
+        authors_data, setAuthorsData,similier_data, 
+        setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
+    
     let blog_data = trainding_data;
 
 
@@ -40,7 +43,7 @@ function TrendingBlogs() {
 
 
     return (
-        <aside className="w-full mt-5 lg:mt-0 lg:w-1/4 p-4 bg-gray-100 rounded-lg shadow-lg max-h-fit">
+        <aside className={`w-full mt-5 lg:mt-0 lg:w-1/4 p-4  rounded-lg shadow-lg max-h-fit`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
             <div className="author-section mt-2 mb-5">
                 <PopularAuthorCard />
             </div>
@@ -52,7 +55,7 @@ function TrendingBlogs() {
                             <li key={blog.id}
                                 className="flex items-center space-x-3 p-4 my-3 rounded-lg"
                                 style={{ background: themeGenerator() }}>
-                                <span className="text-4xl font-semibold text-white">#{index + 1}</span>
+                                <span className="text-4xl">#{index + 1}</span>
                                 <img
                                     src={api_url + blog.filePaths.images}
                                     alt="Thumbnail"
@@ -60,7 +63,7 @@ function TrendingBlogs() {
                                 />
                                 <div className="flex flex-col">
                                     <h3 className="text-lg font-medium">{blog?.caption?.length > 13 ? blog?.caption?.substr(0, 13) + "..." : blog?.caption}</h3>
-                                    <span className="text-sm text-gray-500">{new Date(blog.date_created).toLocaleDateString('en-GB')}</span>
+                                    <span className="text-sm ">{new Date(blog.date_created).toLocaleDateString('en-GB')}</span>
                                 </div>
                             </li>
                         </Link>

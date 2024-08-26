@@ -1,9 +1,16 @@
 
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaThLarge, FaThList } from 'react-icons/fa';
+import { BlogDataContext } from '../../context/Blog_Context';
 
 const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
+
+    let {user_data, setUserData,blog_data, setBlogData,
+        authors_data, setAuthorsData,similier_data, 
+        setSimilierData,trainding_data, setTrandingData,setFontStyle,setFontWeight,setTheme,setTheme2,setBackgroundImage,setFontSize,theme,theme2,fontColor,fontStyle,fontWeight}  = useContext(BlogDataContext);
+
+
     const [searchTerm, setSearchTerm] = useState('');
     const [sortOption, setSortOption] = useState('');
     const [isGrid, setIsGrid] = useState(true); // State to manage grid layout
@@ -24,7 +31,8 @@ const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
     };
 
     return (
-        <div className="p-4 my-4 bg-gray-200 rounded-lg flex flex-col md:flex-row justify-between items-center bg2">
+        <div className={`p-4 my-4 rounded-lg flex flex-col md:flex-row justify-between items-center text-${fontColor}-600 ${fontWeight} ${fontStyle}`} 
+        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
             <div className="w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">
                 <input
                     type="text"

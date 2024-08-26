@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
 import image_ref_c from '../../../assets/img/img7.jpg'; 
 import DashBlogItem from './DashBlogItem/DashBlogItem';
+import { BlogDataContext } from '../../../context/Blog_Context';
 
 const Users = () => {
+
+    const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
+
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('name');
     const [selectedUser, setSelectedUser] = useState(null);
@@ -62,15 +66,16 @@ const Users = () => {
 
     return (
         <div className="px-4 min-h-[86vh] flex flex-col justify-between pb-4">
-            {/* Header */}
+            {/* Navbar */}
             <div>
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-bold">Users</h1>
+                <div className={`flex justify-between items-center mb-6`}>
+                    <span className={`text-2xl font-bold text-${fontColor}-600 {fontStyle} ${fontWeight}`}>Users</span>
                     <div className="flex space-x-4">
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
-                            className="border border-gray-300 rounded p-2"
+                            className={`border border-gray-300 rounded p-2 text-${fontColor}-600`}
+                            style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                         >
                             <option value="name">Sort by Name</option>
                             {/* Add more sort options if necessary */}
@@ -78,7 +83,8 @@ const Users = () => {
                         <select
                             value={sortOrder}
                             onChange={(e) => setSortOrder(e.target.value)}
-                            className="border border-gray-300 rounded p-2"
+                            className={`border border-gray-300 rounded p-2 text-${fontColor}-600`}
+                            style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                         >
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
@@ -89,22 +95,23 @@ const Users = () => {
                 {/* User Content */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {sortedUsers.map((user) => (
-                        <div key={user.id} className="bg-white p-4 rounded-lg shadow-md cursor-pointer" 
+                        <div key={user.id} className={`bg-white p-4 rounded-lg shadow-md cursor-pointer text-${fontColor}-600`} 
+                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                         // onClick={() => openModal(user)}
                         >
                             <img src={user.image} alt={user.name} className="w-full h-48 object-cover rounded-lg mb-4" />
                             <h2 className="text-xl font-bold">{user.name}</h2>
-                            <p className="text-gray-500 my-2">
-                                    <span className="font-semibold">Email:</span> {user.email}
+                            <p className="my-2">
+                                    <span className="">Email:</span> {user.email}
                                 </p>
-                                <p className="text-gray-500 mb-2">
-                                    <span className="font-semibold">Phone:</span> {user.phone}
+                                <p className=" mb-2">
+                                    <span className="">Phone:</span> {user.phone}
                                 </p>
-                                <p className="text-gray-500 mb-2">
-                                    <span className="font-semibold">Followers:</span> {user.followers}
+                                <p className=" mb-2">
+                                    <span className="">Followers:</span> {user.followers}
                                 </p>
-                                <p className="text-gray-500 mb-0">
-                                    <span className="font-semibold">Posts:</span> {user.posts}
+                                <p className=" mb-0">
+                                    <span className="">Posts:</span> {user.posts}
                                 </p>
                         </div>
                     ))}
