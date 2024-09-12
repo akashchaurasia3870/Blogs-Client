@@ -21,14 +21,14 @@ const Sidebar = ({ onMenuItemClick }) => {
 
 
     let [showMenu, setShowMenu] = useState(true);
-    let menu_items = ['Home', 'Blogs', 'Users', 'Notifications', 'Reports', 'Mails','Accounts'];
+    let menu_items = ['Home', 'Blogs', 'Users', 'Notifications', 'Mails','Accounts'];
 
     let menu_logo = {
         'Home': <FaHouse />,
         'Blogs': <BsPostcardFill />,
         'Users': <FaUsers />,
         'Notifications': <IoNotificationsSharp />,
-        'Reports': <MdOutlineReportGmailerrorred />,
+        // 'Reports': <MdOutlineReportGmailerrorred />,
         'Mails': <IoMail />,
         'Accounts': <IoSettingsOutline />,
         'Settings': <MdAccountCircle />,

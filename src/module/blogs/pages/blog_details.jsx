@@ -137,7 +137,7 @@ function BlogDetails({ data }) {
                 <PopularAuthors authors_data={authors_data} />
             </div>
             <div className="slider">
-                <Silk_Slider posts={similier_data} title={"Similar Blogs"}
+                <Silk_Slider posts={similier_data} title={"Similier Blogs"}
                     renderSlide={(post) => <BlogItemDetails data={post} />} slidesToShow={4} />
 
             </div>

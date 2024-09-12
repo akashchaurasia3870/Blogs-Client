@@ -90,7 +90,7 @@ function SignUp() {
                                 }, 3000);
                             } else {
                                 localStorage.setItem("token", data.token);
-                                navigate('/signin')
+                                navigate('/verification')
                             }
                         }).catch((e) => {
                             console.log(e);

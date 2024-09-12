@@ -9,7 +9,8 @@ import FAQ from '../components/FAQ';
 import Settings from '../components/Settings';
 import Accounts from '../components/Accounts';
 import Profile from '../../user/pages/profile';
-
+import Mails from '../../mail/pages/Mails';
+import Notification from '../../notification/pages/Notification'
 const Dashboard = () => {
     const [activePage, setActivePage] = useState('Home');
 
@@ -22,9 +23,9 @@ const Dashboard = () => {
             case 'Users':
                 return <Users />;
             case 'Notifications':
-                return <Notifications />;
-            case 'FAQ':
-                return <FAQ />;
+                return <Notification />;
+            case 'Mails':
+                return <Mails />;
             case 'Settings':
                 return <Settings />;
             case 'Accounts':

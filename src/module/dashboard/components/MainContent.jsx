@@ -8,7 +8,8 @@ import Settings from './Settings';
 import Accounts from './Accounts';
 import Profile from '../../user/pages/profile';
 import SearchSection from './Search/dash_search';
-import Mails from './Mails';
+import Mails from '../../mail/pages/Mails';
+import Notification from '../../notification/pages/Notification'
 import Reports from './Reports';
 import { BlogDataContext } from '../../../context/Blog_Context';
 
@@ -26,13 +27,13 @@ const MainContent = ({ activePage }) => {
             case 'Users':
                 return <Users />;
             case 'Notifications':
-                return <Notifications />;
+                return <Notification />;
             case 'Mails':
                 return <Mails />;
             case 'Settings':
                 return <Settings />;
-            case 'Reports':
-                return <Reports />;
+            // case 'Reports':
+                // return <Reports />;
             case 'Accounts':
                 return <Accounts />;
             default:

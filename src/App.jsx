@@ -15,7 +15,9 @@ import UpdateBlog from './module/blogs/pages/update_blog'
 import Dashboard from './module/dashboard/pages/Dashboard'
 import CategoryPage from './module/blogs/pages/category_page';
 import { BlogDataProvider  } from './context/Blog_Context';
+import AuthorDetails from './module/blogs/pages/author_details'
 import { useEffect } from 'react'
+import EmailVerification from './module/auth/pages/email_verification'
 
 function App() {
 
@@ -37,10 +39,12 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='signin' element={<SignIn />} />
         <Route path='signup' element={<SignUp />} />
+        <Route path='verification' element={<EmailVerification />} />
           <Route path='/' element={<Landing />}>
             <Route index element={<Home />} />
             <Route path='blog/:blog_id' element={<BlogDetails />} />
             <Route path='blogs/author/:author_id' element={<AuthorBlogs />} />
+            <Route path='blogs/:author_id' element={<AuthorDetails />} />
             <Route path='blogs/cat/:category' element={<CategoryBlogs />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
            

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, setPages }) => {
   const getPageNumbers = () => {
     const pageNumbers = [];
     let startPage = Math.max(currentPage - 2, 1);
@@ -22,7 +22,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {/* First Button */}
       {currentPage > 1 && (
         <button
-          onClick={() => onPageChange(1)}
+          onClick={() => setPages(1)}
           className="bg-blue-500 text-white py-2 px-4 rounded-l"
         >
           &laquo;&laquo;
@@ -32,7 +32,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {/* Previous Button */}
       {currentPage > 1 && (
         <button
-          onClick={() => onPageChange(currentPage - 1)}
+          onClick={() => setPages(currentPage - 1)}
           className="bg-blue-500 text-white py-2 px-4"
         >
           &laquo;
@@ -43,7 +43,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {getPageNumbers().map((pageNumber) => (
         <button
           key={pageNumber}
-          onClick={() => onPageChange(pageNumber)}
+          onClick={() => setPages(pageNumber)}
           className={`${
             pageNumber === currentPage
               ? 'bg-blue-700'
@@ -57,7 +57,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {/* Next Button */}
       {currentPage < totalPages && (
         <button
-          onClick={() => onPageChange(currentPage + 1)}
+          onClick={() => setPages(currentPage + 1)}
           className="bg-blue-500 text-white py-2 px-4"
         >
           &raquo;
@@ -67,7 +67,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {/* Last Button */}
       {currentPage < totalPages && (
         <button
-          onClick={() => onPageChange(totalPages)}
+          onClick={() => setPages(totalPages)}
           className="bg-blue-500 text-white py-2 px-4 rounded-r"
         >
           &raquo;&raquo;

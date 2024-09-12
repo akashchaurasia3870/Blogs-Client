@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import { BlogDataContext } from '../../../context/Blog_Context';
 const PopularAuthorCard = ({ author }) => {
 
+    console.log(author);
+    
+
     let { theme,theme2,fontColor,fontStyle,fontWeight ,
         authors_data, setAuthorsData,similier_data, 
         setSimilierData,trainding_data, setTrandingData}  = useContext(BlogDataContext);
@@ -37,7 +40,7 @@ const PopularAuthorCard = ({ author }) => {
 
     return (
         <Link className='w-full'
-        // to={`author/${author.user_id}`}
+        to={`/blogs/${author?.user_id}`}
         >
 
             <div

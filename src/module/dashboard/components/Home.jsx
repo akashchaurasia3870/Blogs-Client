@@ -156,7 +156,7 @@ const Home = () => {
       
 
     const renderCountCard = (title, count, theme) => (
-        <div className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 text-center`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+        <div className={` text-${fontColor}-600 ${fontWeight} ${fontStyle} shadow-md rounded-lg p-4 text-center`} style={{backgroundColor:theme=='black'?'#e2e8f0':'#1e293b'}}>
             <h2 className="text-xl font-bold mb-2">{title}</h2>
             <p className="text-3xl font-bold">{count}</p>
         </div>
