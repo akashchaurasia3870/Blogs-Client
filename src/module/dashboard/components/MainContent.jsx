@@ -43,7 +43,7 @@ const MainContent = ({ activePage }) => {
 
     return (
         <div className={`flex-1 overflow-y-scroll bg-${theme} text-${fontColor}-200 ${fontWeight} ${fontStyle}`}>
-            <SearchSection className='' />
+            <SearchSection className='rounded-none' />
             <div className="mt-0 p-4">
                 {renderPageContent(activePage)}
             </div>

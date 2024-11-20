@@ -1,144 +1,46 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
 import image_ref_c from '../../../assets/img/img7.jpg'
 import DashBlogItem from './DashBlogItem/DashBlogItem';
 import { BlogDataContext } from '../../../context/Blog_Context';
+import { CSVDownload } from "react-csv";
+import api_url, { exportPdf } from '../../../utils/utils';
+
+
 
 const Blogs = () => {
 
     const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
-
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('name');
     const [selectedBlog, setSelectedBlog] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
+    const [download, setDownload] = useState(false);
+    const [blogs, setBlogsData] = useState([]);
+    const [search, setSearch] = useState('');
 
-    // Sample blog data
-    const blogs = [
-        {
-            id: 1,
-            image: 'https://via.placeholder.com/400x300', 
-            title: 'The Joys of Blogging',
-            date_created: '2024-08-22',
-            likes: 150,
-        },
-        {
-            id: 2,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Why React is Amazing',
-            date_created: '2024-08-21',
-            likes: 250,
-        },
-        {
-            id: 3,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Understanding JavaScript Closures',
-            date_created: '2024-08-20',
-            likes: 180,
-        },
-        {
-            id: 4,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'A Guide to Tailwind CSS',
-            date_created: '2024-08-19',
-            likes: 300,
-        },
-        {
-            id: 5,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Mastering Redux for State Management',
-            date_created: '2024-08-18',
-            likes: 220,
-        },
-        {
-            id: 6,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'The Future of Web Development',
-            date_created: '2024-08-17',
-            likes: 190,
-        },
-        {
-            id: 7,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Exploring Node.js and Express',
-            date_created: '2024-08-16',
-            likes: 275,
-        },
-        {
-            id: 8,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Building RESTful APIs with Express',
-            date_created: '2024-08-15',
-            likes: 310,
-        },
-        {
-            id: 9,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Getting Started with MongoDB',
-            date_created: '2024-08-14',
-            likes: 200,
-        },
-        {
-            id: 10,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Async/Await in JavaScript',
-            date_created: '2024-08-13',
-            likes: 165,
-        },
-        {
-            id: 11,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'WebSockets: Real-time Communication',
-            date_created: '2024-08-12',
-            likes: 240,
-        },
-        {
-            id: 12,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Introduction to GraphQL',
-            date_created: '2024-08-11',
-            likes: 280,
-        },
-        {
-            id: 13,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Optimizing Web Performance',
-            date_created: '2024-08-10',
-            likes: 330,
-        },
-        {
-            id: 14,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'CSS Grid vs. Flexbox',
-            date_created: '2024-08-09',
-            likes: 210,
-        },
-        {
-            id: 15,
-            image: 'https://via.placeholder.com/400x300',
-            title: 'Understanding TypeScript',
-            date_created: '2024-08-08',
-            likes: 290,
-        },
-    ];
+        
+    // pagination 
+    const [pages,setPages] = useState(1);
+    const [totalPages,setTotalPages] = useState(0);
+    const [totalCount,setTotalCount] = useState(0);
+    const [limit,setLimit] = useState(5);
+
     
-
-    // Sort and paginate the blogs
     const sortedBlogs = [...blogs].sort((a, b) => {
         if (sortBy === 'name') {
             return sortOrder === 'asc'
-                ? a.title.localeCompare(b.title)
-                : b.title.localeCompare(a.title);
+                ? a.caption.localeCompare(b.caption)
+                : b.caption.localeCompare(a.caption);
         } else if (sortBy === 'date') {
             return sortOrder === 'asc'
-                ? new Date(a.date) - new Date(b.date)
-                : new Date(b.date) - new Date(a.date);
+                ? new Date(a.date_created) - new Date(b.date_created)
+                : new Date(b.date_created) - new Date(a.date_created);
         } else if (sortBy === 'likes') {
             return sortOrder === 'asc' ? a.likes - b.likes : b.likes - a.likes;
         }
         return 0;
     });
-
 
     const openModal = (blog) => {
         setSelectedBlog(blog);
@@ -150,12 +52,12 @@ const Blogs = () => {
         setSelectedBlog(null);
     };
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 3;
-
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
-        // Fetch data for the new page or update the displayed content
+    };
+
+    const handleDownload = () => {
+        setDownload(true);
     };
 
     const formatDate = (dateString) => {
@@ -173,48 +75,151 @@ const Blogs = () => {
         }
     };
 
+    const getBlogs = async ()=>{
+        console.log(search,sortBy,sortOrder,limit,pages);
+
+        fetch(`${api_url}/blogs/get_blogs`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=UTF-8",
+                    "Authorization": localStorage.getItem("token"),
+                },
+                body: JSON.stringify({
+                    pages,
+                    limit,
+                    "sort":sortBy,
+                    "sort_order":sortOrder,
+                    "search":search
+                }),
+
+            }
+        )
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {            
+            setBlogsData(data.data);
+            setTotalCount(data.pagination_data.totalCount)
+            setTotalPages(data.pagination_data.totalPages)
+        }).catch(error => {
+            setTimeout(() => {
+                // setIsLoading(false);
+            }, 2000)
+            console.log(error.message);
+            
+        });
+    }
+
+    useEffect(()=>{
+             getBlogs();
+    },[pages,sortBy,sortOrder,search])
+
+
     return (
         <div className="px-4 min-h-[86vh] flex flex-col justify-between pb-4">
-            {/* Navbar */}
-
             <div>
-            <div className="flex justify-between items-center mb-6">
-                <h1 className={`text-2xl font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Blogs</h1>
-                <div className="flex space-x-4">
-                    <select
-                        value={sortBy}
-                        onChange={(e) => setSortBy(e.target.value)}
-                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
-                    >
-                        <option value="name">Sort by Name</option>
-                        <option value="date">Sort by Date</option>
-                        <option value="likes">Sort by Likes</option>
-                    </select>
-                    <select
-                        value={sortOrder}
-                        onChange={(e) => setSortOrder(e.target.value)}
-                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
-                    >
-                        <option value="asc">Ascending</option>
-                        <option value="desc">Descending</option>
-                    </select>
+                <div className="flex justify-between items-center mb-6">
+                    <h1 className={`text-2xl font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Blogs</h1>
+                    <div className="flex space-x-4">
+                        <span className={`border border-gray-300 rounded p-2 bg-${theme} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight} `} onClick={()=>{
+                            exportPdf(blogs)
+                        }}>Export PDF</span>
+
+                        <span className={`border border-gray-300 rounded p-2 bg-${theme} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight} `} onClick={handleDownload}>Export Excel</span>
+                         {download && (
+                            <CSVDownload
+                            data={blogs}
+                            onComplete={() => setDownload(false)} // Reset after download
+                            />
+                        )}
+                        <select
+                            value={sortBy}
+                            onChange={(e) => setSortBy(e.target.value)}
+                            className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
+                        >
+                            <option value="name">Sort by Name</option>
+                            <option value="date">Sort by Date</option>
+                            <option value="likes">Sort by Likes</option>
+                        </select>
+                        <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
+                        >
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
             {/* Blog Content */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {blogs.map((blog) => (
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> */}
+
+                {/* {blogs.map((blog) => (
                      <DashBlogItem blog={blog} />
-                ))}
-            </div>
+                ))} */}
+
+            {/* </div> */}
+
+                <div className="">
+                    <div className="pb-4">
+                        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                        </div>
+                        <div className="overflow-x-auto">
+                        <table className="min-w-full leading-normal shadow-md rounded-lg overflow-hidden" 
+                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                        >
+                            <thead >
+                            <tr>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Image
+                                </th>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Title
+                                </th>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Date Created
+                                </th>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Likes
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {blogs.map((item) => (
+                                <tr key={item.id} 
+                                >
+                                <td className="px-5 py-5 text-sm">
+                                    <img src={api_url+item.filePaths.images} alt={'img'} className="w-20 h-20 rounded-md object-cover" />
+                                </td>
+                                <td className="px-5 py-5 text-sm">
+                                    <p className="text-gray-900 whitespace-no-wrap">{item.caption}</p>
+                                </td>
+                                <td className="px-5 py-5 text-sm">
+                                    <p className="text-gray-900 whitespace-no-wrap">{item.date_created}</p>
+                                </td>
+                                <td className="px-5 py-5 text-sm">
+                                    <p className="text-gray-900 whitespace-no-wrap">{item.likes}</p>
+                                </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* Pagination */}
            
-            <Pagination className=''
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
+            <Pagination 
+                currentPage={pages} 
+                totalPages={totalPages} 
+                setPages={setPages} 
             />
 
             {/* Modal */}

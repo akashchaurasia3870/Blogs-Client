@@ -6,19 +6,12 @@ const Profile = () => {
 
     const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
   
-
-    // console.log(data.data);
-
     let [image_url, setImageUrl] = useState(null);
-    // if (data.data?.userImage != null && data.data?.userImage != undefined) {
-    //     setImageUrl(data.data.userImage);
-    // }
 
     const [isEditable, setIsEditable] = useState(false);
     const [profileData, setProfileData] = useState({});
     const [originalData, setOriginalData] = useState({});
 
-    // Fetch user details from API on component mount
     useEffect(() => {
         fetchUserDetails();
     }, []);

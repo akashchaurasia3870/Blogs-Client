@@ -1,3 +1,7 @@
+
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
+
 let api_url = "http://localhost:5000";
 // let api_url = "https://sell-and-buy-mart-backend.vercel.app";
 
@@ -29,5 +33,22 @@ export function emailValidation(email) {
     }
     return false;
 };
+
+export const exportPdf = (blogs,filename)=>{
+    const doc = new jsPDF()
+
+    autoTable(doc, { html: '#my-table' })
+
+    const tableHeading = [Object.keys(blogs[0])];
+
+    const tableData = blogs.map(item => Object.values(item));
+
+    autoTable(doc, {
+      head: tableHeading,
+      body: tableData
+    })
+
+    doc.save(filename+'.pdf')
+}
 
 

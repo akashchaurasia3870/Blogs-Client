@@ -44,12 +44,13 @@ const Post_Slider = ({ posts, renderSlide, title ,slidesToShow = 10 }) => {
     
 
     return (
-        <div className="w-full p-4 mt-5">
+        <div className="w-full mt-5" 
+        >
             <h1 className={`text-2xl font-bold ml-2 text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>{title}</h1>
 
             <Slider {...settings}>
                 {posts.map((post, index) => (
-                    <div key={index} className="p-2">
+                    <div key={index} className="p-1">
                         {renderSlide(post)}
                     </div>
                 ))}

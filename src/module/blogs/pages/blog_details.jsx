@@ -48,7 +48,8 @@ function BlogDetails({ data }) {
 
     return (
         <section className={`min-h-[70vh] py-8 bg-${theme}`}>
-            <div className={`mx-10 flex flex-col lg:flex-row text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-lg`}>
+
+            <div className={`mx-4 flex flex-col lg:flex-row text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-lg`}>
                 {/* Blog Details Section */}
                 <div className="w-full lg:w-3/4 pr-0 lg:pr-8 flex flex-col justify-between rounded-lg mr-4" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
 
@@ -132,15 +133,15 @@ function BlogDetails({ data }) {
                 <TrendingBlogs trainding_data={trainding_data}  />
             </div>
 
-            {/* Below Blog Details */}
-            <div className="mt-12">
+            <div className="mt-12 -mx-2">
                 <PopularAuthors authors_data={authors_data} />
             </div>
-            <div className="slider">
+
+            <div className="slider py-4 px-2">
                 <Silk_Slider posts={similier_data} title={"Similier Blogs"}
                     renderSlide={(post) => <BlogItemDetails data={post} />} slidesToShow={4} />
-
             </div>
+
         </section>
     );
 }

@@ -31,7 +31,7 @@ const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
     };
 
     return (
-        <div className={`p-4 my-4 rounded-lg flex flex-col md:flex-row justify-between items-center text-${fontColor}-600 ${fontWeight} ${fontStyle}`} 
+        <div className={`p-4 my-4 rounded-lg flex flex-col md:flex-row justify-between items-center text-${fontColor}-600 ${fontWeight} ${fontStyle} w-full`} 
         style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
         >
             <div className="w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">

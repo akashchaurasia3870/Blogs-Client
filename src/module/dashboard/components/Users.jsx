@@ -1,47 +1,34 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
 import image_ref_c from '../../../assets/img/img7.jpg'; 
 import DashBlogItem from './DashBlogItem/DashBlogItem';
 import { BlogDataContext } from '../../../context/Blog_Context';
+import api_url from '../../../utils/utils';
 
 const Users = () => {
 
     const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
 
+    const [users, setUsers] = useState([]);
+
     const [sortOrder, setSortOrder] = useState('asc');
     const [sortBy, setSortBy] = useState('name');
     const [selectedUser, setSelectedUser] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
+    const [search, setSearch] = useState('');
 
-    // Sample user data
-    const users = [
-        {
-            id: 1,
-            image: 'https://via.placeholder.com/150', 
-            name: 'John Doe',
-            email: 'johndoe@example.com',
-            phone: '+1 234 567 890',
-            followers: 1500,
-            posts: 25,
-        },
-        {
-            id: 2,
-            image: 'https://via.placeholder.com/150',
-            name: 'Jane Smith',
-            email: 'janesmith@example.com',
-            phone: '+1 987 654 321',
-            followers: 2500,
-            posts: 30,
-        },
-        // Add more user data as needed
-    ];
 
-    // Sort and paginate the users
+        // pagination 
+        const [pages,setPages] = useState(1);
+        const [totalPages,setTotalPages] = useState(0);
+        const [totalCount,setTotalCount] = useState(0);
+        const [limit,setLimit] = useState(5);
+    
     const sortedUsers = [...users].sort((a, b) => {
         if (sortBy === 'name') {
             return sortOrder === 'asc'
-                ? a.name.localeCompare(b.name)
-                : b.name.localeCompare(a.name);
+                ? a.username.localeCompare(b.username)
+                : b.username.localeCompare(a.username);
         }
         return 0;
     });
@@ -56,13 +43,51 @@ const Users = () => {
         setSelectedUser(null);
     };
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 3; // Adjust as per the number of pages needed
+    const getUsers = async () => {
 
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-        // Fetch data for the new page or update the displayed content
+        console.log(search,sortBy,sortOrder,limit,pages);
+        
+
+             fetch(`${api_url}/users/get_users`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": localStorage.getItem("token")
+                },
+                body: JSON.stringify({
+                    pages,
+                    limit,
+                    "sort":sortBy,
+                    "sort_order":sortOrder,
+                    "search":search
+                }),
+            }).then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((result) => {
+                console.log(result);
+                
+                setUsers(result.data)
+                setTotalCount(result.pagination_data.totalCount)
+                setTotalPages(result.pagination_data.totalPages)
+            })
+            .catch((error) => {
+                console.error('There was a problem with the fetch operation:', error);
+                alert('Failed to send message. Please try again later.');
+            });
+        
+    
     };
+
+    useEffect(()=>{
+        getUsers()
+    },[pages,sortBy,sortOrder,search])
+
+
+
 
     return (
         <div className="px-4 min-h-[86vh] flex flex-col justify-between pb-4">
@@ -93,7 +118,7 @@ const Users = () => {
                 </div>
 
                 {/* User Content */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {sortedUsers.map((user) => (
                         <div key={user.id} className={`bg-white p-4 rounded-lg shadow-md cursor-pointer text-${fontColor}-600`} 
                         style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
@@ -115,14 +140,63 @@ const Users = () => {
                                 </p>
                         </div>
                     ))}
-                </div>
+                </div> */}
             </div>
 
+            <div className="">
+                    <div className="pb-4">
+                        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                        </div>
+                        <div className="overflow-x-auto">
+                        <table className="min-w-full leading-normal shadow-md rounded-lg overflow-hidden" 
+                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                        >
+                            <thead >
+                            <tr>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                User
+                                </th>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Email
+                                </th>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Date Created
+                                </th>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Verified
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {sortedUsers?.map((item) => (
+                                <tr key={item.id} 
+                                >
+                                <td className="px-5 py-5 text-sm flex flex-col justify-center items-center">
+                                    <img src={api_url+item.userImage} alt={'img'} className="w-20 h-20 rounded-md object-cover" />
+                                    <span>{item.username}</span>
+                                </td>
+                                <td className="px-5 py-5 text-sm">
+                                    <p className="text-gray-900 whitespace-no-wrap">{item.email}</p>
+                                </td>
+                                <td className="px-5 py-5 text-sm">
+                                    <p className="text-gray-900 whitespace-no-wrap">{item.createdAt}</p>
+                                </td>
+                                <td className="px-5 py-5 text-sm">
+                                    <p className="text-gray-900 whitespace-no-wrap">{item.verified?'True':'False'}</p>
+                                </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+
             {/* Pagination */}
-            <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
+            <Pagination 
+                currentPage={pages} 
+                totalPages={totalPages} 
+                setPages={setPages} 
             />
 
             {/* Modal */}

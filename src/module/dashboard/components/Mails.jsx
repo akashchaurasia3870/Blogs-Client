@@ -89,7 +89,7 @@ const Notifications = () => {
             </div>
 
             {/* Notification Content */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {notifications.map((notification) => (
                     <div
                         key={notification.id}
@@ -104,7 +104,56 @@ const Notifications = () => {
                                 <p>{notification.description}</p>
                     </div>
                 ))}
-            </div>
+            </div> */}
+
+                <div className="">
+                    <div className="pb-4">
+                        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                        </div>
+                        <div className="overflow-x-auto">
+                        <table className="min-w-full leading-normal shadow-md rounded-lg overflow-hidden" 
+                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                        >
+                            <thead >
+                            <tr>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Sender
+                                </th>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Subject
+                                </th>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Content
+                                </th>
+                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Date Created
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {filteredNotifications?.map((item) => (
+                                <tr key={item.id} 
+                                >
+                                <td className="px-5 py-5 text-sm flex flex-col justify-center items-center">
+                                    <img src={api_url+item.user_details.userImage} alt={'img'} className="w-20 h-20 rounded-md object-cover" />
+                                    <span>{item.user_details.username}</span>
+                                </td>
+                                <td className="px-5 py-5 text-sm">
+                                    <p className="text-gray-900 whitespace-no-wrap">{item.subject}</p>
+                                </td>
+                                <td className="px-5 py-5 text-sm">
+                                    <p className="text-gray-900 whitespace-no-wrap">{item.content}</p>
+                                </td>
+                                <td className="px-5 py-5 text-sm">
+                                    <p className="text-gray-900 whitespace-no-wrap">{item.date_created}</p>
+                                </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
 
             {/* Pagination */}
             <Pagination className=''

@@ -8,7 +8,10 @@ import CategorySlider from '../../global_components/category_slider/category_sli
 import api_url from '../../utils/utils'
 import { BlogDataContext } from '../../context/Blog_Context'
 import { useNavigate } from 'react-router-dom'
+import Loading from '../loading/Loading'
 function Home() {
+
+    let [isLoading, setIsLoading] = useState(true);
 
     const slides = [
         {
@@ -89,7 +92,6 @@ function Home() {
         option:'',
         search:''
     });
-
     
     useEffect(() => {
 
@@ -112,9 +114,7 @@ function Home() {
             }
             return response.json();
         })
-        .then(data => {
-            // console.log(data);
-            
+        .then(data => {            
 
             setBlogsData(data.data);
             setSimilierData(data.data_c.category_blog);
@@ -130,19 +130,28 @@ function Home() {
                 setTheme2('800');
             }
             setBackgroundImage(data.data_c.backgroundStyle)
-            // setLoading(false);
+
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 2000)
         })
         .catch(error => {
-            // setError(error.message);
-            // setLoading(false);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 2000)
+        
             localStorage.removeItem("token");
             navigate('/signin');
         });
     }, [filter_data]);
 
-
-
     return (
+        <>
+            {
+                isLoading === true && <div className='loader'>
+                    <Loading />
+                </div>
+            }
         <div className={`bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
             <div className="box pt-6">
 
@@ -153,6 +162,7 @@ function Home() {
             <Pagination />
             
         </div>
+        </>
     )
 }
 
