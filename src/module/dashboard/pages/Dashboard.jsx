@@ -13,6 +13,7 @@ import Mails from '../../mail/pages/Mails';
 import Notification from '../../notification/pages/Notification'
 const Dashboard = () => {
     const [activePage, setActivePage] = useState('Home');
+    
 
     const renderPageContent = () => {
         switch (activePage) {
@@ -38,7 +39,7 @@ const Dashboard = () => {
     return (
         <div className="flex max-h-screen">
             <Sidebar onMenuItemClick={setActivePage} />
-            <MainContent activePage={activePage}>
+            <MainContent activePage={activePage} onMenuItemClick={setActivePage}>
                 {renderPageContent()}
             </MainContent>
         </div>

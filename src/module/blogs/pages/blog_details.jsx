@@ -47,7 +47,7 @@ function BlogDetails({ data }) {
     }, [blog_id]);
 
     return (
-        <section className={`min-h-[70vh] py-8 bg-${theme}`}>
+        <section className={`min-h-[80vh] py-8 bg-${theme} text-[13px] sm:text-sm md:text-md lg:text-lg`}>
 
             <div className={`mx-4 flex flex-col lg:flex-row text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-lg`}>
                 {/* Blog Details Section */}
@@ -56,14 +56,14 @@ function BlogDetails({ data }) {
                     <div className="flex flex-col justify-center p-2 mx-2">
 
                         <div className='flex justify-between items-center'>
-                            <h1>{blog.caption}</h1>
-                            <h3 className='flex justify-between items-center'><SlCalender className='mr-2' />{new Date(blog.date_created).toLocaleDateString('en-GB')}</h3>
+                            <span>{blog.caption}</span>
+                            <span className='flex justify-between items-center'><SlCalender className='mr-2' />{new Date(blog.date_created).toLocaleDateString('en-GB')}</span>
                         </div>
                         <div className="flex flex-col justify-center items-center">
-                            <img src={img_path} alt="Blog Thumbnail" className="max-h-[60vh] rounded-lg object-contain" />
-                            <p className="mt-8 text-lg leading-relaxed">{blog.content}</p>
+                            <img src={img_path} alt="Blog Thumbnail" className="max-h-[30vh] rounded-lg object-contain" />
+                            <p className="mt-8 leading-relaxed">{blog.content}</p>
 
-                            <p className="mt-8 text-lg leading-relaxed">
+                            <p className="mt-8 leading-relaxed">
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.  Quidem similique excepturi perspiciatis! Labore quasi laborum autem hic. Inventore, sit quia, ipsum unde natus aut explicabo praesentium expedita tempora deleniti, at repellat vel eius quaerat illum ipsam rerum eligendi? Dolore, iusto asperiores fuga dolorem quidem debitis esse architecto eum iure et consequuntur libero facilis. Ea quia totam omnis quas deleniti quod necessitatibus adipisci numquam reprehenderit aliquam quis iste quibusdam nemo aperiam, modi maiores explicabo laudantium eum ipsam eius unde autem aut enim cupiditate? Animi minima est illo, quibusdam omnis officia architecto possimus nostrum perferendis molestias! Natus iure alias in itaque corrupti.
 
                             </p>
@@ -71,7 +71,7 @@ function BlogDetails({ data }) {
                         </div>
 
                         {/* Additional Blog Information */}
-                        <div className="blog_additional_info text-sm text-gray-600 flex flex-col space-y-4 px-6 mt-5 w-full bg-gray-300 py-2 rounded-lg">
+                        <div className="blog_additional_info text-gray-600 flex flex-col space-y-4 px-6 mt-5 w-full bg-gray-300 py-2 rounded-lg">
                             <div className="flex flex-col justify-between">
                                 {/* Hashtags */}
                                 <div className="blog_hashtags mb-2">
@@ -133,7 +133,7 @@ function BlogDetails({ data }) {
                 <TrendingBlogs trainding_data={trainding_data}  />
             </div>
 
-            <div className="mt-12 -mx-2">
+            <div className="mt-6 -mx-2">
                 <PopularAuthors authors_data={authors_data} />
             </div>
 

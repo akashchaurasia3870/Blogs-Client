@@ -100,7 +100,7 @@ const CategorySlider = () => {
 
 
   return (
-    <div className="slider px-5">
+    <div className="p-0 m-0 md:px-5 hidden md:block">
         <Silk_Slider posts={categories} title={""}
         renderSlide={(post) => <CategoryComponent post={post} />} />
     </div>

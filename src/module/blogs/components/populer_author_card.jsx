@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { BlogDataContext } from '../../../context/Blog_Context';
 const PopularAuthorCard = ({ author }) => {
 
-    console.log(author);
+    // console.log(author);
     
 
     let { theme,theme2,fontColor,fontStyle,fontWeight ,

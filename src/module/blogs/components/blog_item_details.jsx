@@ -19,7 +19,7 @@ const BlogItemDetails = ({ data }) => {
     let img_path = data.filePaths.images;
     img_path = api_url + img_path;
 
-    const short_desc = blog_data?.content?.length > 130 ? blog_data?.content?.substr(0, 130) + "..." : blog_data?.content;
+    const short_desc = blog_data?.content?.length > 130 ? blog_data?.content?.substr(0, 50) + "..." : blog_data?.content;
 
     const blog_title = blog_data?.caption?.length > 15 ? blog_data?.caption?.substr(0, 15) + "..." : blog_data?.caption;
 
@@ -34,8 +34,8 @@ const BlogItemDetails = ({ data }) => {
                 </div>
                 <div className="blog_content">
                     <div className='flex justify-between items-center'>
-                        <h3 className='text-sm md:text-lg lg:text-md'>{blog_title}</h3>
-                        <h3 className='flex justify-between items-center text-sm md:text-lg lg:text-md'><SlCalender className='mr-2' />{new Date(blog_data.date_created).toLocaleDateString('en-GB')}</h3>
+                        <h3 className='text-sm md:text-md'>{blog_title}</h3>
+                        <h3 className='flex justify-between items-center text-xs'><SlCalender className='mr-2' />{new Date(blog_data.date_created).toLocaleDateString('en-GB')}</h3>
                     </div>
                     <p className='text-sm md:text-lg lg:text-sm'>{short_desc}</p>
                     {/* <div className="blog_footer">
@@ -48,7 +48,7 @@ const BlogItemDetails = ({ data }) => {
             </Link>
 
             {/* Additional Information */}
-            <div className="blog_additional_info mt-4 text-sm flex flex-col space-y-2">
+            <div className="blog_additional_info mt-4 text-xs flex flex-col space-y-2">
 
                 {/* Hashtags */}
                 <div className="blog_hashtags mt-2">
@@ -66,35 +66,35 @@ const BlogItemDetails = ({ data }) => {
                             <button className="like-btn flex items-center justify-center">
                                 <GrLike /> <span className='ml-1'>{blog_data.likes}</span>
                             </button>
-                            <span className=""> Likes</span>
+                            <span className="text-xs"> Likes</span>
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
                             <button className="like-btn flex items-center justify-center">
                                 <GoComment />
                             </button>
-                            <span className="ml-1">Comments</span>
+                            <span className="ml-1 text-xs">Comments</span>
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
                             <button className="like-btn flex items-center justify-center">
                                 <CiShare1 />
                             </button>
-                            <span className="ml-1">Share</span>
+                            <span className="ml-1 text-xs">Share</span>
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
                             <button className="like-btn flex items-center justify-center">
                                 <CiCirclePlus />
                             </button>
-                            <span className="ml-1">Follow</span>
+                            <span className="ml-1 text-xs">Follow</span>
                         </div>
 
                         <div className="flex flex-col items-center justify-center">
                             <button className="like-btn flex items-center justify-center">
                                 <BsBookmark />
                             </button>
-                            <span className="ml-1">Save</span>
+                            <span className="ml-1 text-xs">Save</span>
                         </div>
                     </div>
                 </div>

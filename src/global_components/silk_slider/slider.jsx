@@ -22,7 +22,7 @@ const Post_Slider = ({ posts, renderSlide, title ,slidesToShow = 10 }) => {
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 4,
                 },
             },
             {
@@ -40,15 +40,15 @@ const Post_Slider = ({ posts, renderSlide, title ,slidesToShow = 10 }) => {
         ],
     };
 
-    console.log(posts);
+    // console.log(posts);
     
 
     return (
-        <div className="w-full mt-5" 
+        <div className="mt-5" 
         >
-            <h1 className={`text-2xl font-bold ml-2 text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>{title}</h1>
+            <h3 className={`font-bold text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>{title}</h3>
 
-            <Slider {...settings}>
+            <Slider {...settings} className=''>
                 {posts.map((post, index) => (
                     <div key={index} className="p-1">
                         {renderSlide(post)}

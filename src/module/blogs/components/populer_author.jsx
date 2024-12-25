@@ -29,7 +29,7 @@ const PopularAuthors = () => {
                     })
                 });
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
 
             // Set the authors data and the total number of authors
             setAuthors(data.data);
@@ -43,14 +43,14 @@ const PopularAuthors = () => {
     //     fetchAuthors(5);
     // }, []);
 
-    console.log(authors);
+    // console.log(authors);
     
 
 
     return (
         <div className={`p-6 mx-6 rounded-lg`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
             <h1 className={`text-2xl font-bold mb-6 text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>Popular Authors</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
                 {authors.length > 0 && authors.map((author) => (
                     <PopularAuthorCard key={author.user_id} author={author} />
                 ))}

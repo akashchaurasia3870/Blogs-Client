@@ -264,7 +264,7 @@ const Mails = () => {
     
 
     return (
-        <div className={`text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-lg`}>
+        <div className={`text-${fontColor}-600 ${fontWeight} ${fontStyle} rounded-lg text-[9px] sm:text-xs md:text-sm lg:text-md mb-12 md:mb-0`}>
             <button 
                 onClick={() => setMassEmailOpen(true)}
                 className=" px-4 py-2 rounded mb-6"
@@ -291,25 +291,25 @@ const Mails = () => {
 
             </div> */}
             <div className="">
-                    <div className="pb-4">
-                        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
-                        </div>
+                    <div className="">
+                        {/* <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                        </div> */}
                         <div className="overflow-x-auto">
-                        <table className="min-w-full leading-normal shadow-md rounded-lg overflow-hidden" 
+                        <table className="w-full leading-normal shadow-md rounded-lg overflow-hidden" 
                         style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                         >
                             <thead >
                             <tr>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
                                 Sender
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
                                 Subject
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
                                 Content
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
                                 Date Created
                                 </th>
                             </tr>
@@ -318,20 +318,20 @@ const Mails = () => {
                             {filteredMails?.map((item) => (
                                 <tr key={item.id} 
                                 >
-                                <td className="px-5 py-5 text-sm flex flex-col justify-center items-center">
+                                <td className="px-5 py-3 flex flex-col justify-center items-center">
                                     <img src={
                                         // api_url+
-                                        item.userImage} alt={'img'} className="w-20 h-20 rounded-md object-cover" />
+                                        item.userImage} alt={'img'} className="w-16 h-16 rounded-md object-cover" />
                                     <span>{item.username}</span>
                                 </td>
-                                <td className="px-5 py-5 text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">{item.subject}</p>
+                                <td className="px-5 py-3 ">
+                                    <p className=" whitespace-no-wrap">{item.subject}</p>
                                 </td>
-                                <td className="px-5 py-5 text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">{item.content}</p>
+                                <td className="px-5 py-3">
+                                    <p className=" whitespace-no-wrap">{item.content}</p>
                                 </td>
-                                <td className="px-5 py-5 text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">{item.date_created}</p>
+                                <td className="px-5 py-3">
+                                    <p className=" whitespace-no-wrap">{item.date_created}</p>
                                 </td>
                                 </tr>
                             ))}

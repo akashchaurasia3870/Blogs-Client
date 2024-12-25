@@ -14,12 +14,12 @@ const MailFilter = ({ sortBy, setSortBy, sortOrder, setSortOrder, search, setSea
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search by subject or sender"
-                className="border border-gray-300 rounded p-2 flex-1 mr-4"
+                className={"bg-gray-${theme2} rounded p-1 md:p-2 flex-1 mr-4"}
             />
             <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="border border-gray-300 rounded p-2 bg-white mr-4"
+                className={`bg-gray-${theme2} rounded p-1 md:p-2 bg-white mr-4`}
             >
                 <option value="date">Sort by Date</option>
                 <option value="name">Sort by Name</option>
@@ -28,10 +28,10 @@ const MailFilter = ({ sortBy, setSortBy, sortOrder, setSortOrder, search, setSea
             <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
-                className="border border-gray-300 rounded p-2 bg-white"
+                className={`bg-gray-${theme2} rounded p-1 md:p-2 bg-white mr-4`}
             >
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
+                <option value="asc">Asc</option>
+                <option value="desc">Desc</option>
             </select>
         </div>
     );

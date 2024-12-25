@@ -90,17 +90,16 @@ const Users = () => {
 
 
     return (
-        <div className="px-4 min-h-[86vh] flex flex-col justify-between pb-4">
+        <div className="p-0 md:px-4 min-h-[80vh] flex flex-col justify-between pb-4 text-[9px] sm:text-xs md:text-sm lg:text-md mb-16 md:mb-0">
             {/* Navbar */}
             <div>
-                <div className={`flex justify-between items-center mb-6`}>
-                    <span className={`text-2xl font-bold text-${fontColor}-600 {fontStyle} ${fontWeight}`}>Users</span>
-                    <div className="flex space-x-4">
+                <div className={`flex justify-between items-center mb-2`}>
+                    <h3 className={`font-bold text-${fontColor}-600 {fontStyle} ${fontWeight}`}>Users</h3>
+                    <div className="flex space-x-2">
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
-                            className={`border border-gray-300 rounded p-2 text-${fontColor}-600`}
-                            style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            className={` bg-gray-${theme2} rounded p-1 md:p-2 text-${fontColor}-600`}
                         >
                             <option value="name">Sort by Name</option>
                             {/* Add more sort options if necessary */}
@@ -108,8 +107,7 @@ const Users = () => {
                         <select
                             value={sortOrder}
                             onChange={(e) => setSortOrder(e.target.value)}
-                            className={`border border-gray-300 rounded p-2 text-${fontColor}-600`}
-                            style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                            className={`bg-gray-${theme2} rounded p-1 md:p-2 text-${fontColor}-600`}
                         >
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
@@ -143,54 +141,51 @@ const Users = () => {
                 </div> */}
             </div>
 
-            <div className="">
-                    <div className="pb-4">
-                        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
-                        </div>
-                        <div className="overflow-x-auto">
-                        <table className="min-w-full leading-normal shadow-md rounded-lg overflow-hidden" 
-                        style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+            <div className="pb-4 min-h-[60vh]">
+                {/* <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                </div> */}
+                <div className="overflow-x-auto">
+                        <table className={`min-w-full leading-normal shadow-md rounded-lg overflow-hidden bg-gray-${theme2}`} 
                         >
-                            <thead >
+                            <thead className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>
                             <tr>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold uppercase tracking-wider">
                                 User
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
                                 Email
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
                                 Date Created
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold  uppercase tracking-wider">
                                 Verified
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             {sortedUsers?.map((item) => (
-                                <tr key={item.id} 
+                                <tr key={item.id} className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
                                 >
-                                <td className="px-5 py-5 text-sm flex flex-col justify-center items-center">
-                                    <img src={api_url+item.userImage} alt={'img'} className="w-20 h-20 rounded-md object-cover" />
+                                <td className="px-5 py-5 flex flex-col justify-center items-center">
+                                    <img src={api_url+item.userImage} alt={'img'} className="w-16 h-16 rounded-md object-cover" />
                                     <span>{item.username}</span>
                                 </td>
-                                <td className="px-5 py-5 text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">{item.email}</p>
+                                <td className="px-5 py-5">
+                                    <p className=" whitespace-no-wrap">{item.email}</p>
                                 </td>
-                                <td className="px-5 py-5 text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">{item.createdAt}</p>
+                                <td className="px-5 py-5">
+                                    <p className=" whitespace-no-wrap">{item.createdAt}</p>
                                 </td>
-                                <td className="px-5 py-5 text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">{item.verified?'True':'False'}</p>
+                                <td className="px-5 py-5">
+                                    <p className=" whitespace-no-wrap">{item.verified?'True':'False'}</p>
                                 </td>
                                 </tr>
                             ))}
                             </tbody>
                         </table>
-                        </div>
-                    </div>
                 </div>
+            </div>
 
             {/* Pagination */}
             <Pagination 
@@ -205,7 +200,7 @@ const Users = () => {
                     <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
                         <button
                             onClick={closeModal}
-                            className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl"
+                            className="absolute top-4 right-4  hover:text-gray-900 text-2xl"
                         >
                             &times;
                         </button>

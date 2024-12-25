@@ -7,7 +7,7 @@ const SimiliarBlogs = () => {
 
     let blog_data = data.blog_data;
 
-    console.log(blog_data);
+    // console.log(blog_data);
 
 
     return (

@@ -32,7 +32,7 @@ const HomeSlider = ({ slides }) => {
 
 
     return (
-        <div className={`mb-12 mx-6 rounded-lg text-${fontColor}-600 ${fontWeight} ${fontStyle}`} 
+        <div className={`-mb-3 md:mb-12 mx-6 rounded-lg text-${fontColor}-600 ${fontWeight} ${fontStyle} text-[10px] sm:text-sm md:text-md lg:text-lg`} 
         style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
         // style={{background:getRandomHexColor()}}
         >
@@ -40,14 +40,14 @@ const HomeSlider = ({ slides }) => {
                 {slides.map((slide, index) => (
                     <div
                         key={index}
-                        className={`relative h-[40vh] md:h[50vh] lg:h-[60vh] rounded-lg`}
+                        className={`h-[36vh] sm:h-[40vh] md:h[50vh] lg:h-[60vh] rounded-lg`}
                     >
-                        <div className={`absolute top-0 left-0 w-full h-full flex justify-around items-center text-center p-4 `}>
-                            <div className="b1 w-[30%]">
-                                <h2 className=" text-left text-5xl font-bold mb-2">{slide.title}</h2>
-                                <p className=" text-left text-2xl">{slide.description}</p>
+                        <div className={`w-full h-full flex justify-around items-center text-center p-4 `}>
+                            <div className="w-full">
+                                <h2 className="text-center font-bold mb-2">{slide.title}</h2>
+                                <p className="text-center">{slide.description}</p>
                             </div>
-                            <div className="b2">
+                            <div className="">
 
                             </div>
                         </div>

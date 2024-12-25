@@ -154,7 +154,6 @@ function Home() {
             }
         <div className={`bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
             <div className="box pt-6">
-
                 <HomeSlider slides={slides} />
             </div>
             <CategorySlider />

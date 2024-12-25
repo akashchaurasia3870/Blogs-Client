@@ -1,11 +1,11 @@
 import React from 'react';
 import img from '../../assets/img/img1.jpg';
 const CategoryComponent = ({post}) => {
-  console.log(post);
+  // console.log(post);
   
   return (
     <div 
-      className="relative h-[8rem] w-[8rem] rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-[1.05]"
+      className="h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-32 lg:w-32 rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-[1.05] text-[10px] sm:text-sm md:text-md lg:text-lg"
       style={{backgroundColor:post.theme}}
     >
       {/* <img 
@@ -13,8 +13,8 @@ const CategoryComponent = ({post}) => {
         alt={post.title} 
         className="w-full h-full object-cover"
       /> */}
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <h3 className="text-white text-xl font-bold">{post.title}</h3>
+      <div className="flex items-center justify-center w-full h-full">
+        <span className="text-white font-bold">{post.title}</span>
       </div>
     </div>
   );

@@ -115,7 +115,7 @@ const AddBlog = () => {
         e.preventDefault();
 
 
-        console.log(blogData);
+        // console.log(blogData);
 
         try {
             let url = `${api_url}/blogs/add`;

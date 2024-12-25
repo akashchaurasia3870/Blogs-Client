@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import img1 from '../../assets/img/img1.jpg'
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -6,6 +6,19 @@ import { MdClose } from "react-icons/md";
 import { BlogDataContext } from '../../context/Blog_Context';
 
 function Navbar() {
+
+    // const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // console.log(localStorage.getItem("token"));
+    // console.log(localStorage.getItem("token")=='');
+    // console.log(localStorage.getItem("token")==null);
+    // console.log(localStorage.getItem("token")==undefined);
+    
+    const is_login = localStorage.getItem("token")==''?false:true ;
+
+    console.log(is_login);
+    
+
 
     let nevigate = useNavigate();
     const { theme,theme2,fontColor,fontStyle,fontWeight } = useContext(BlogDataContext);
@@ -16,29 +29,35 @@ function Navbar() {
         nevigate('/signin');
     }
     return (
-        <nav className={`w-full flex items-center justify-between text-${fontColor}-600 ${fontWeight} ${fontStyle}`} 
+        <nav className={`flex items-center justify-between text-${fontColor}-600 ${fontWeight} ${fontStyle} text-[11px] sm:text-sm md:text-md lg:text-lg px-4 md:px-6`} 
         style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
         >
+            <div className='w-[20%]'>
+                <Link to="/" className='h-12 w-12 block'>
+                    <img src={img1} alt="Logo" className='rounded-full' />
+                </Link>
+            </div>
 
-            <Link to="/" className='nav_logo '>
-                <img src={img1} alt="Logo" className='rounded-lg' />
-            </Link>
+            <div className='w-[80%] lg:w-[40%]'>
+                {is_login && <div className="sm:space-x-2 md:space-x-6 flex items-center justify-between">
 
-            <ul className="nav_menu">
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/profile">Profile</Link></li>
-                <li><Link to="/create_blog">Create Blog</Link></li>
-                <li><Link to="/authors">Authors</Link></li>
-                <li><Link to="/signup">SignUp</Link></li>
-                <li><Link to="/signin">SignIn</Link></li>
-                <li onClick={() => { handleLogout() }}><Link to="/signout">SignOut</Link></li>
-            </ul>
+                    <Link to="/" className={`block px-2 py-1 md:px-4 md:py-2 text-${theme}-800 hover:bg-gray-100 rounded-md duration-100 ease-in-out`}>Home</Link>
+                    <Link to="/profile" className={`block px-2 py-1 md:px-4 md:py-2 text-${theme}-800 hover:bg-gray-100 rounded-md duration-100 ease-in-out`}>Account</Link>
+                    <Link to="/create_blog" className={`block px-2 py-1 md:px-4 md:py-2 text-${theme}-800 hover:bg-gray-100 rounded-md duration-100 ease-in-out`}>Posts</Link>
+                    <Link to="/authors" className={`block px-2 py-1 md:px-4 md:py-2 text-${theme}-800 hover:bg-gray-100 rounded-md duration-100 ease-in-out`}>Writers</Link>
+                    <Link to="/signin" onClick={() => { handleLogout() }} className={`block px-2 py-1 md:px-4 md:py-2 text-${theme}-800 hover:bg-gray-100 rounded-md duration-100 ease-in-out`}>Logout</Link>
+                    </div>
+                }
 
-            <button className="nav_toggle_btn">
-                <GiHamburgerMenu />
-                <MdClose />
-            </button>
+                {!is_login && <div className="space-x-4 md:space-x-12">
+                    <Link to="/signup" className={`block px-2 py-1 md:px-4 md:py-2 text-${theme}-800 hover:bg-gray-100 rounded-md duration-100 ease-in-out`}>Sign Up</Link>
+                    <Link to="/signin" className={`block px-2 py-1 md:px-4 md:py-2 text-${theme}-800 hover:bg-gray-100 rounded-md duration-100 ease-in-out`}>Sign In</Link>
+                </div>
+                }
+            </div>
+            
 
+            
         </nav>
 
     )

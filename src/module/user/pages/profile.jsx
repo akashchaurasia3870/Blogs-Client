@@ -158,10 +158,9 @@ const Profile = () => {
         <div className={`flex flex-col items-center justify-center min-h-screen bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle} p-4`} 
         >
             <div className="p-6 rounded-lg shadow-md w-full">
-                <h2 className="text-2xl font-semibold mb-6">Profile Page</h2>
-                <div className="flex flex-row-reverse justify-center items-center ">
+                <div className="flex flex-col justify-center items-center ">
                     {/* User Image Section */}
-                    <div className="w-full lg:w-2/5 flex flex-col items-center justify-center"             style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
+                    <div className="w-full flex flex-col items-center justify-center"             
                     >
                         <img
                             src={image_url}
@@ -183,7 +182,7 @@ const Profile = () => {
                     </div>
 
                     {/* Profile Details Section */}
-                    <div className="w-full lg:w-3/5 pl-6">
+                    <div className="w-full">
                         <form className="space-y-4">
                             <div className="input_container p-3 rounded-lg" style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                             >

@@ -11,7 +11,7 @@ import { SlCalender } from "react-icons/sl";
 function BlogItem(data) {
 
 
-    console.log("data ====> ", data);
+    // console.log("data ====> ", data);
 
     let blog_data = data.data;
 
@@ -24,25 +24,6 @@ function BlogItem(data) {
     img_path = api_url + img_path
 
     return (
-        // <article className='blog'>
-        //     <Link to={`blogs/${blog_data.blog_id}`}>
-        //         <div className="blog_thumbnail">
-        //             <img src={img_path} alt="thumbnail" />
-        //         </div>
-        //         <div className="blog_content">
-
-        //             <h3>{blog_title}</h3>
-
-        //             <p>{short_desc}</p>
-        //             <div className="blog_footer">
-        //                 <BlogAuther author_id={blog_data.user_id} />
-        //                 <Link to={`blogs/cat/${blog_data.user_id}`} >
-        //                     <h3 className='btn'>{blog_data?.category}</h3>
-        //                 </Link>
-        //             </div>
-        //         </div>
-        //     </Link>
-        // </article>
         <article className='w-full sm:w-[40%] md:w-[30%] lg:w-[23%] m-2 bg-gray-100 rounded-xl p-2'>
             <Link to={`/blog/${blog_data.blog_id}`} state={{ blogData: blog_data }}>
 
@@ -55,12 +36,7 @@ function BlogItem(data) {
                         <h3 className='flex justify-between items-center text-sm md:text-lg lg:text-md'><SlCalender className='mr-2' />{new Date(blog_data.date_created).toLocaleDateString('en-GB')}</h3>
                     </div>
                     <p className='text-sm md:text-lg lg:text-sm'>{short_desc}</p>
-                    {/* <div className="blog_footer">
-                        <BlogAuther author_id={blog_data.user_id} />
-                        <Link to={`blogs/cat/${blog_data.user_id}`}>
-                            <h3 className='btn'>{blog_data?.category}</h3>
-                        </Link>
-                    </div> */}
+                    
                 </div>
             </Link>
 

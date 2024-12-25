@@ -31,10 +31,10 @@ const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
     };
 
     return (
-        <div className={`p-4 my-4 rounded-lg flex flex-col md:flex-row justify-between items-center text-${fontColor}-600 ${fontWeight} ${fontStyle} w-full`} 
+        <div className={`p-4 my-4 rounded-lg flex flex-row justify-between items-center text-${fontColor}-600 ${fontWeight} ${fontStyle} w-full text-[10px] sm:text-sm md:text-md lg:text-lg`} 
         style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
         >
-            <div className="w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">
+            <div className="w-[40%] md:mb-0">
                 <input
                     type="text"
                     value={searchTerm}
@@ -44,7 +44,7 @@ const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
                 />
             </div>
 
-            <div className="flex items-center space-x-4 w-1/2 md:w-1/2 lg:w-2/12">
+            <div className="flex items-center space-x-4 w-[30%]">
                 <select
                     value={sortOption}
                     onChange={handleSortChange}
@@ -60,7 +60,7 @@ const Filter = ({ onSearch, onDateFilter, onSort, onLayoutChange }) => {
 
                 <button
                     onClick={toggleGridLayout}
-                    className="p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 flex items-center justify-center"
+                    className="p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 hidden md:block"
                     title="Toggle Grid/List Layout"
                 >
                     {isGrid ? <FaThList className="text-lg" /> : <FaThLarge className="text-lg" />}

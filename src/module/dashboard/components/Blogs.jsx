@@ -115,21 +115,21 @@ const Blogs = () => {
     }
 
     useEffect(()=>{
-             getBlogs();
+        getBlogs();
     },[pages,sortBy,sortOrder,search])
 
 
     return (
-        <div className="px-4 min-h-[86vh] flex flex-col justify-between pb-4">
-            <div>
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className={`text-2xl font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Blogs</h1>
-                    <div className="flex space-x-4">
-                        <span className={`border border-gray-300 rounded p-2 bg-${theme} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight} `} onClick={()=>{
+        <div className="p-0 md:px-4 min-h-[86vh] flex flex-col justify-between pb-4 text-[9px] sm:text-xs md:text-sm lg:text-md mb-16 md:mb-0">
+            <div className='w-full'>
+                <div className="flex justify-between items-center mb-2">
+                    <h3 className={`font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Blogs</h3>
+                    <div className="flex space-x-2">
+                        <span className={`p-1 md:p-2 rounded bg-gray-${theme2} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight} text-center `} onClick={()=>{
                             exportPdf(blogs)
                         }}>Export PDF</span>
 
-                        <span className={`border border-gray-300 rounded p-2 bg-${theme} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight} `} onClick={handleDownload}>Export Excel</span>
+                        <span className={` rounded p-1 md:p-2 bg-gray-${theme2} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight} `} onClick={handleDownload}>Export Excel</span>
                          {download && (
                             <CSVDownload
                             data={blogs}
@@ -139,7 +139,7 @@ const Blogs = () => {
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
-                            className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
+                            className={`rounded p-1 md:p-2 bg-gray-${theme2} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
                         >
                             <option value="name">Sort by Name</option>
                             <option value="date">Sort by Date</option>
@@ -148,69 +148,57 @@ const Blogs = () => {
                         <select
                             value={sortOrder}
                             onChange={(e) => setSortOrder(e.target.value)}
-                            className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
+                            className={`rounded p-1 md:p-2 bg-gray-${theme2} text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
                         >
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Descending</option>
+                            <option value="asc">Asc</option>
+                            <option value="desc">Desc</option>
                         </select>
                     </div>
                 </div>
-
-            {/* Blog Content */}
-            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> */}
-
-                {/* {blogs.map((blog) => (
-                     <DashBlogItem blog={blog} />
-                ))} */}
-
-            {/* </div> */}
-
                 <div className="">
-                    <div className="pb-4">
                         <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
                         </div>
                         <div className="overflow-x-auto">
                         <table className="min-w-full leading-normal shadow-md rounded-lg overflow-hidden" 
                         style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}
                         >
-                            <thead >
+                            <thead className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>
                             <tr>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left font-semibold uppercase tracking-wider">
                                 Image
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold uppercase tracking-wider">
                                 Title
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left  font-semibold uppercase tracking-wider">
                                 Date Created
                                 </th>
-                                <th className="px-5 py-3 border-b-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th className="px-5 py-3 border-b-2 text-left font-semibold uppercase tracking-wider">
                                 Likes
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             {blogs.map((item) => (
-                                <tr key={item.id} 
+                                <tr key={item.id} className={`text-${fontColor}-600 ${fontStyle} ${fontWeight}`}
                                 >
-                                <td className="px-5 py-5 text-sm">
-                                    <img src={api_url+item.filePaths.images} alt={'img'} className="w-20 h-20 rounded-md object-cover" />
+                                <td className="px-5 py-5">
+                                    <img src={api_url+item.filePaths.images} alt={'img'} className="w-16 h-16 rounded-md object-cover" />
                                 </td>
-                                <td className="px-5 py-5 text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">{item.caption}</p>
+                                <td className="px-5 py-5">
+                                    <p className=" whitespace-no-wrap">{item.caption}</p>
                                 </td>
-                                <td className="px-5 py-5 text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">{item.date_created}</p>
+                                <td className="px-5 py-5">
+                                    <p className=" whitespace-no-wrap">{item.date_created}</p>
                                 </td>
-                                <td className="px-5 py-5 text-sm">
-                                    <p className="text-gray-900 whitespace-no-wrap">{item.likes}</p>
+                                <td className="px-5 py-5">
+                                    <p className=" whitespace-no-wrap">{item.likes}</p>
                                 </td>
                                 </tr>
                             ))}
                             </tbody>
                         </table>
                         </div>
-                    </div>
                 </div>
             </div>
 

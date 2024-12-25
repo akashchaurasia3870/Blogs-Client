@@ -84,7 +84,7 @@ const AddBlog = () => {
             });
 
             if (response.ok) {
-                console.log("Blog created successfully!");
+                // console.log("Blog created successfully!");
                 setBlogData({
                     title: "",
                     content: "",

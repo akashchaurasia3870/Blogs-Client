@@ -12,10 +12,15 @@ import Mails from '../../mail/pages/Mails';
 import Notification from '../../notification/pages/Notification'
 import Reports from './Reports';
 import { BlogDataContext } from '../../../context/Blog_Context';
+import Horizontalbar from './Horizontalbar';
 
-const MainContent = ({ activePage }) => {
+const MainContent = ({ activePage,onMenuItemClick }) => {
 
     const {theme,theme2,fontColor,fontStyle,fontWeight,setTheme,setTheme2,setFontSize,setFontColor,setFontWeight,setFontStyle,setBackgroundImage} = useContext(BlogDataContext);
+
+    // const onMenuItemClick = (item)=>{
+    //     setActivePage(item)
+    // }
 
 
     const renderPageContent = () => {
@@ -46,6 +51,9 @@ const MainContent = ({ activePage }) => {
             <SearchSection className='rounded-none' />
             <div className="mt-0 p-4">
                 {renderPageContent(activePage)}
+            </div>
+            <div className='md:hidden'>
+                <Horizontalbar menuChange={onMenuItemClick} />
             </div>
         </div>
     );

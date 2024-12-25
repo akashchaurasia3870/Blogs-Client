@@ -5,7 +5,7 @@ const MassNotificationPopup = ({ onClose, onSend }) => {
     const [content, setContent] = useState('');
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 mx-4">
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
                 <button
                     onClick={onClose}

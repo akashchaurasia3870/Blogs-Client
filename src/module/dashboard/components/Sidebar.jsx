@@ -43,7 +43,7 @@ const Sidebar = ({ onMenuItemClick }) => {
 
     // }, [showMenu])
     return (
-        <div className={`h-screen text-${fontColor}-600 ${fontWeight} ${fontStyle} w-auto transition-all ease-in-out duration-500 relative `} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
+        <div className={`h-screen text-${fontColor}-600 ${fontWeight} ${fontStyle} w-auto transition-all ease-in-out duration-500 relative hidden md:block`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>
             <div className={`p-4 font-bold text-xl  menu_items flex justify-${showMenu?'start':'center'} items-center relative text-[1.5rem] cursor-pointer mt-2`}>
 
                 <div className={`menu_icons flex items-center justify-center`} onClick={() => { handleMenuChange(true) }}><RxDashboard /></div>

@@ -7,6 +7,7 @@ import api_url from '../../../utils/utils';
 import { useContext, useEffect, useState } from 'react';
 import PopularAuthors from '../components/populer_author';
 import { BlogDataContext } from '../../../context/Blog_Context';
+import UserBio from '../components/user_bio';
 
 const AuthorDetails = () => {
 
@@ -50,7 +51,8 @@ const AuthorDetails = () => {
 
     return (
       <div className={`mx-auto p-6 bg-${theme} text-${fontColor}-600 ${fontWeight} ${fontStyle}`}>
-        <AuthorBio author_data={author_data} />
+        {/* <AuthorBio author_data={author_data} /> */}
+        <UserBio />
         <AuthorsBlogs blogs_data={blogs_data} />
         <Pagination />
         {/* <PopularAuthors /> */}

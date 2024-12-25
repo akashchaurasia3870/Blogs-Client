@@ -65,22 +65,22 @@ const Notifications = () => {
     };
 
     return (
-        <div className="p-6">
+        <div className="p-6 text-[9px] sm:text-xs md:text-sm lg:text-md">
             {/* Navbar */}
             <div className="flex justify-between items-center mb-6">
-                <h1 className={`text-2xl font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Notifications</h1>
-                <div className="flex space-x-4">
+                <h3 className={`font-bold  text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>Notifications</h3>
+                <div className="flex space-x-2">
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
+                        className={`bg-gray-${theme2} rounded p-1 md:p-2 text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
                     >
                         <option value="date">Sort by Date</option>
                     </select>
                     <select
                         value={sortOrder}
                         onChange={(e) => setSortOrder(e.target.value)}
-                        className={`border border-gray-300 rounded p-2 bg-${theme} text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
+                        className={`bg-gray-${theme2} rounded p-1 md:p-2  text-${fontColor}-600 ${fontStyle} ${fontWeight} `}
                     >
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>

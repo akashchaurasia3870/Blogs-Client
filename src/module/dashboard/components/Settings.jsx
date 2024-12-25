@@ -9,11 +9,11 @@ const Settings = () => {
     },[]);
 
     return (
-        <div className={`p-6 bg-${theme} text-${fontColor}-500 ${fontWeight} ${fontStyle}`}>
+        <div className={`p-2 md:p-6 bg-${theme} text-${fontColor}-500 ${fontWeight} ${fontStyle}`}>
            
-            <p className={`font-bold mb-6 text-3xl text-${fontColor}-600 ${fontWeight} ${fontStyle} ml-4 `}>Settings</p>
+            <p className={`font-bold mb-2 text-3xl text-${fontColor}-600 ${fontWeight} ${fontStyle} ml-4 `}>Settings</p>
 
-            <div className={`flex flex-col`}>
+            <div className={`flex flex-col mb-12 md:mb-0`}>
                 <div className={`w-full p-2 flex flex-wrap flex-row`}>
                     {/* Theme */}
                     <div className={`shadow-md p-2 w-full sm:w-[45%] m-2 rounded-lg`} style={{backgroundColor:theme=='black'?'#1e293b':'#e2e8f0'}}>

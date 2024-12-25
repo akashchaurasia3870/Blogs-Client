@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BlogDataContext } from '../../../context/Blog_Context';
 import api_url from '../../../utils/utils';
-
 const AccountPage = () => {
     // Initial user details
     const {theme,theme2,fontColor,fontStyle,fontWeight} = useContext(BlogDataContext);
+    let [isLoading, setIsLoading] = useState(true);
+
 
     const [userDetails, setUserDetails] = useState({
         username: 'admin',
@@ -21,6 +22,8 @@ const AccountPage = () => {
     const [originalData, setOriginalData] = useState({});
 
     const fetchUserDetails = async () => {
+        setIsLoading(true);
+
         try {
             const response = await fetch(`${api_url}/users/get_user`, {
                 method: "POST",
@@ -46,6 +49,8 @@ const AccountPage = () => {
             setOriginalData(data_c);
         } catch (error) {
             console.error("Error fetching user details:", error);
+        } finally{
+            setIsLoading(false);
         }
     };
 
@@ -90,6 +95,7 @@ const AccountPage = () => {
 
     const handleFileUpload = (file, type) => {
 
+        setIsLoading(true);
 
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -109,7 +115,9 @@ const AccountPage = () => {
                     setProfileData({ ...profileData, userImage: data.fileUrl });
 
                 })
-                .catch((error) => console.error("Error uploading file:", error));
+                .catch((error) => console.error("Error uploading file:", error)).finally(()=>{
+                        setIsLoading(false);
+                });
         };
         reader.readAsArrayBuffer(file);
 
@@ -120,6 +128,8 @@ const AccountPage = () => {
     // Update user details
     const updateUserDetails = async () => {
         try {
+            setIsLoading(true);
+
             let url = api_url + '/users/update_user';
             console.log(profileData);
 
@@ -151,6 +161,8 @@ const AccountPage = () => {
             }
         } catch (error) {
             console.error("Error updating user details:", error);
+        } finally{
+                setIsLoading(false);
         }
     };
 
@@ -159,12 +171,13 @@ const AccountPage = () => {
     }, []);
 
     return (
-        <div className="p-6 max-w-screen-lg mx-auto">
-            <h1 className="text-2xl font-bold mb-6">Account Details</h1>
+
+        <>
+        <div className="p-6 max-w-screen-lg mx-auto text-[9px] sm:text-xs md:text-sm lg:text-md mb-12 md:mb-0">
             <form className="space-y-6" 
             >
                 {/* Profile Picture */}
-                <div className={`flex items-center space-x-4 mb-6 bg-${theme} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>
+                <div className={`flex items-center justify-center space-x-4 mb-6 bg-${theme} cursor-pointer text-${fontColor}-600 ${fontStyle} ${fontWeight}`}>
                     <div className="relative w-32 h-32">
                         <img
                             src={image_url}
@@ -187,9 +200,9 @@ const AccountPage = () => {
                             </>
                         }
                     </div>
-                    <div>
+                    {/* <div>
                         <h2 className="">Profile Picture</h2>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Username */}
@@ -280,6 +293,7 @@ const AccountPage = () => {
                 </div>
             </form>
         </div>
+        </>
     );
 };
 
