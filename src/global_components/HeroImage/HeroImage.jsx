@@ -1,6 +1,6 @@
 import React from 'react';
 
-import heroImage from '../../assets/img/img7.jpg';
+import heroImage from '../../assets/img/img1.jpg';
 
 const HeroSection = ({ width = '100%',
     height = '60vh',

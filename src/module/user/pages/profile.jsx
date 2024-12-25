@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import img from '../../../assets/img/img8.jpg';
+import img from '../../../assets/img/img1.jpg';
 import { BlogDataContext } from "../../../context/Blog_Context";
 import api_url from "../../../utils/utils";
 const Profile = () => {

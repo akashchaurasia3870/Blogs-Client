@@ -1,5 +1,5 @@
 import React from 'react'
-import author_img from '../../../assets/img/img11.jpg';
+import author_img from '../../../assets/img/img1.jpg';
 import { Link } from 'react-router-dom';
 function BlogAuther({ author_id }) {
     return (

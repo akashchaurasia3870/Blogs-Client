@@ -4,8 +4,8 @@ import img2 from '../../assets/img/img2.jpg';
 import img3 from '../../assets/img/img1.jpg';
 import img4 from '../../assets/img/img4.jpg';
 import img5 from '../../assets/img/img5.jpg';
-import img6 from '../../assets/img/img6.jpg';
-import img7 from '../../assets/img/img7.jpg';
+import img1 from '../../assets/img/img1.jpg';
+import img1 from '../../assets/img/img1.jpg';
 
 const Slider = ({ width = '100%', height = '100vh' }) => {
     const slides = [
@@ -14,8 +14,8 @@ const Slider = ({ width = '100%', height = '100vh' }) => {
         { id: 3, image: img3, title: 'Slide 3 Title', description: 'This is the description for slide 3.', bgColor: '#8E44AD' },
         { id: 4, image: img4, title: 'Slide 4 Title', description: 'This is the description for slide 4.', bgColor: '#27AE60' },
         { id: 5, image: img5, title: 'Slide 5 Title', description: 'This is the description for slide 5.', bgColor: '#E67E22' },
-        { id: 6, image: img6, title: 'Slide 6 Title', description: 'This is the description for slide 6.', bgColor: '#2980B9' },
-        { id: 7, image: img7, title: 'Slide 7 Title', description: 'This is the description for slide 7.', bgColor: '#D35400' },
+        { id: 6, image: img1, title: 'Slide 6 Title', description: 'This is the description for slide 6.', bgColor: '#2980B9' },
+        { id: 7, image: img1, title: 'Slide 7 Title', description: 'This is the description for slide 7.', bgColor: '#D35400' },
     ];
 
     const [currentSlide, setCurrentSlide] = useState(0);

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Pagination from '../../../global_components/pagination/pagination';
-import image_ref_c from '../../../assets/img/img7.jpg'; 
+import image_ref_c from '../../../assets/img/img1.jpg'; 
 import DashBlogItem from './DashBlogItem/DashBlogItem';
 import { BlogDataContext } from '../../../context/Blog_Context';
 import api_url from '../../../utils/utils';

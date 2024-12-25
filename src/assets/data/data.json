@@ -31,14 +31,14 @@
         "author_id": 5
     },{
         "id": 5,
-        "thumbnail": "img6",
+        "thumbnail": "img1",
         "category": "batman",
         "title": "This is the title of very first blog on this blog",
         "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet deserunt voluptates nostrum quisquam.",
         "author_id": 6
     },{
         "id": 6,
-        "thumbnail": "img7",
+        "thumbnail": "img1",
         "category": "spiderman",
         "title": "This is the title of very first blog on this blog",
         "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet deserunt voluptates nostrum quisquam.",
